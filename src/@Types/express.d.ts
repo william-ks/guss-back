@@ -1,9 +1,10 @@
-import { User } from "../api/entities/User";
+import { Gestor } from "../api/entities/gestor";
 
 declare global {
   namespace Express {
     export interface Request {
-      user?: Partial<User>;
+      gestor?: Partial<Gestor>;
+      // gestor?: Partial<Gestor>;
     }
   }
 }

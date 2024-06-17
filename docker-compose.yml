@@ -1,23 +1,16 @@
-version: '3'
+version: '3.7'
 
 services:
-  app:
-    build: .
-    command: npm run dev
-    depends_on:
-      - postgres
-    ports:
-      - "8080:8080"
-    volumes:
-      - .:/usr/app
-
   postgres:
-    container_name: 'postgres-node'
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-    volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+    image: postgres:16.3
     ports:
-      - "5432:5432"
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=guss
+    volumes:
+      - polls_pg_data:/var/lib/postgresql/data
+
+volumes:
+  polls_pg_data:

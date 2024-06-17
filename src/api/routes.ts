@@ -1,8 +1,11 @@
 import { Router } from "express";
-import { userRouter } from "./use-cases/Users/users.routes";
+import { gestorRouter } from "./useCases/master/gestors/gestor.routes";
 
 const router = Router();
 
-router.use(userRouter);
+router.use("/gestor", gestorRouter);
+router.use("/teacher", () => {});
+router.use("/student", () => {});
+router.use("/dev", () => {});
 
 export { router };
