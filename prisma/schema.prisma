@@ -24,6 +24,8 @@ model Gestor {
   email      String
   password   String
   birthday   String?
+  cpf        String?
+  address    String?
   office     Office   @relation(fields: [officeId], references: [id])
   officeId   String
   is_active  Boolean  @default(true)
