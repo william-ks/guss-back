@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Office {
-  id     String   @id @default(cuid())
+  id     Int      @id @default(autoincrement())
   title  String
   Gestor Gestor[]
 
@@ -19,15 +19,18 @@ model Office {
 }
 
 model Gestor {
-  id         String   @id @default(cuid())
-  name       String
-  email      String
-  password   String
-  birthDate  String?
-  cpf        String?
-  address    String?
-  office     Office   @relation(fields: [officeId], references: [id])
-  officeId   String
+  id        Int     @id @default(autoincrement())
+  public_id String  @unique
+  name      String
+  email     String
+  password  String
+  birthDate String?
+  cpf       String?
+  address   String?
+
+  office   Office @relation(fields: [officeId], references: [id])
+  officeId Int
+
   is_active  Boolean  @default(true)
   started_at DateTime @default(now())
 
@@ -35,11 +38,12 @@ model Gestor {
 }
 
 model Student {
-  id         String  @id @default(cuid())
+  id         Int     @id @default(autoincrement())
+  public_id String  @unique
   name       String
   email      String
   password   String
-  celphone   String?
+  phone   String?
   cpf        String?
   birthDate  String?
   class_time String?

@@ -1,5 +1,5 @@
 export interface IUpdateSelfGestorDTO {
-  id: string;
+  id: number;
   name?: string;
   email?: string;
   birthDate?: string;

@@ -1,18 +1,20 @@
 import jwt from "jsonwebtoken";
-import { IHandleToken } from "../../tokens/IHandleToken";
+import { ICreateToken, IHandleToken } from "../../tokens/IHandleToken";
 
 export class HandleToken implements IHandleToken {
-  createToken(id: string, to: "gestor" | "student"): string {
+  createToken(props: ICreateToken): string {
+    const { public_id, to } = props;
+
     if (to === "gestor") {
       const token = jwt.sign({}, process.env.JWT_PASS_GESTOR, {
-        subject: id,
+        subject: public_id,
         expiresIn: "8h",
       });
 
       return token;
     } else {
       const token = jwt.sign({}, process.env.JWT_PASS_STUDENT, {
-        subject: id,
+        subject: public_id,
         expiresIn: "8h",
       });
 

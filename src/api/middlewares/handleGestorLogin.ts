@@ -25,7 +25,7 @@ export const handleGestorLogin = async (
     const gestorId = handleToken.readToken(token, "gestor");
 
     const gestor = await gestorRepository.findBy({
-      key: "id",
+      key: "public_id",
       value: gestorId,
     });
 

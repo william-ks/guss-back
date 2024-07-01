@@ -6,7 +6,7 @@ export class ReadOtherGestorService {
 
   async execute({ wantedId }: IReadOtherGestorDTO) {
     const foundedGestor = await this.gestorRepository.findBy({
-      key: "id",
+      key: "public_id",
       value: wantedId,
     });
 
@@ -17,7 +17,7 @@ export class ReadOtherGestorService {
       };
     }
 
-    const { password, ...gestor } = foundedGestor;
+    const { password, id: personal, ...gestor } = foundedGestor;
 
     return gestor;
   }

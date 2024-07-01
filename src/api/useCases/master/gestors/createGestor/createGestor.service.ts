@@ -1,4 +1,5 @@
 import { schemaValidate } from "../../../../composables/handleSchemaValidate";
+import { idGenerator } from "../../../../composables/idGenerator";
 import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
 import { IGestorRepository } from "../../../../repositories/gestor/IGestorRepository";
 import { IOfficeRepository } from "../../../../repositories/office/IOfficeRepository";
@@ -52,9 +53,11 @@ export class CreateGestorService {
     }
 
     const password = this.handlePass.generatePass(12);
+    const public_id = idGenerator();
 
     await this.gestorRepository.save({
       ...props,
+      public_id,
       password: await this.handlePass.encrypt(password),
     });
 

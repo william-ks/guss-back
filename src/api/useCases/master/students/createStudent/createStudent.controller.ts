@@ -5,14 +5,14 @@ export class CreateStudentController {
   constructor(private readonly service: CreateStudentService) {}
 
   async handle(req: Request, res: Response) {
-    const { photo, name, email, celphone, cpf, address, birthday, class_time } =
+    const { photo, name, email, phone, cpf, address, birthday, class_time } =
       req.body;
 
     const password = await this.service.execute({
       photo,
       name,
       email,
-      celphone,
+      phone,
       cpf,
       address,
       birthday,

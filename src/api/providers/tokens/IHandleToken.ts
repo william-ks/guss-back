@@ -1,4 +1,9 @@
 export interface IHandleToken {
-  createToken(id: string, to: "gestor" | "student"): string;
+  createToken(props: ICreateToken): string;
   readToken(token: string, to: "gestor" | "student"): string;
+}
+
+export interface ICreateToken {
+  public_id: string;
+  to: "gestor" | "student";
 }

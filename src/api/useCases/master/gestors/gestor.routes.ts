@@ -7,14 +7,21 @@ import { readOtherGestorController } from "./readOtherGestor";
 import { readSelfGestorController } from "./readSelfGestor";
 import { toggleStatusGestorController } from "./toggleStatusGestor";
 import { updateSelfGestorController } from "./updateSelf";
+import { idGenerator } from "../../../composables/idGenerator";
 
 const gestorRouter = Router();
+
+gestorRouter.get("/id", async (req, res) => {
+  const id = idGenerator();
+
+  return res.json(id);
+});
 
 gestorRouter.post("/login", async (req, res) => {
   return loginGestorController.handle(req, res);
 });
 
-gestorRouter.post("/create", handleGestorLogin, async (req, res) => {
+gestorRouter.post("/create", async (req, res) => {
   return createGestorController.handle(req, res);
 });
 

@@ -10,7 +10,7 @@ export class ReadSelfGestorService {
       value: id,
     });
 
-    const { password, ...toReturn } = gestor;
+    const { password, id: myId, ...toReturn } = gestor;
 
     return toReturn;
   }

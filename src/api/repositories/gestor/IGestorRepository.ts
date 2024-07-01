@@ -10,19 +10,19 @@ export interface IGestorRepository {
 }
 
 export interface IFindBy {
-  key: "email" | "id" | "cpf";
-  value: string;
+  key: "email" | "id" | "cpf" | "public_id";
+  value: string | number;
 }
 
 export interface IFindAnother extends IFindBy {
-  id: string;
+  id: number;
 }
 
 export interface IUpdateGestor {
-  id: string;
+  id: number;
   name?: string;
   email?: string;
-  officeId?: string;
+  officeId?: number;
   password?: string;
   cpf?: string;
   birthDate?: string;
@@ -30,14 +30,15 @@ export interface IUpdateGestor {
 }
 
 export interface IToggleStatus {
-  id: string;
+  public_id: string;
   status: boolean;
 }
 
 export interface ISaveGestor {
+  public_id: string;
   name: string;
   email: string;
-  officeId: string;
+  officeId: number;
   password: string;
   cpf?: string;
   birthDate?: string;

@@ -1,7 +1,8 @@
-import { randomUUID } from "crypto";
+import { idGenerator } from "../composables/idGenerator";
 
 export class Student {
-  public readonly id: string;
+  public readonly id?: number;
+  public readonly public_id: string;
   public name: string;
   public email: string;
   public password: string;
@@ -10,13 +11,13 @@ export class Student {
   public birthDate?: string;
   public class_time?: string;
 
-  constructor(props: Omit<Student, "id">, id?: string) {
+  constructor(props: Omit<Student, "public_id">, public_id?: string) {
     Object.assign(this, props);
 
-    if (!id) {
-      this.id = randomUUID();
+    if (!public_id) {
+      this.public_id = idGenerator();
     } else {
-      this.id = id;
+      this.public_id = public_id;
     }
   }
 }

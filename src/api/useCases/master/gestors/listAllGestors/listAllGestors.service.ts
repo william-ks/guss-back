@@ -7,7 +7,7 @@ export class ListAllGestorsService {
     const gestorsRaw = await this.gestorRepository.findAll();
 
     const gestorsRedo = gestorsRaw.map((el) => {
-      const { password, ...data } = el;
+      const { password, id, ...data } = el;
       return data;
     });
 

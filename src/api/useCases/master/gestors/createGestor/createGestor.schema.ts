@@ -8,11 +8,16 @@ const createGestorSchema = z.object({
   email: z
     .string({ required_error: "O E-mail é obrigatório" })
     .email({ message: "Email inválido" }),
-  officeId: z.string({
-    required_error: "O ID de cargo 'officeId' é obrigatório.",
-  }),
+  officeId: z
+    .number({
+      required_error: "O ID de cargo 'officeId' é obrigatório.",
+    })
+    .min(1)
+    .max(10),
   cpf: z
-    .string()
+    .string({
+      required_error: "O CPF é obrigatório.",
+    })
     .min(11, "Invalid CPF.")
     .max(11, "Invalid CPF.")
     .nullish()

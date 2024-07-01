@@ -1,12 +1,13 @@
 import { Student } from "../../entities/Student";
 
 export interface IFindBy {
-  key: "email" | "email" | "id";
-  value: string;
+  key: "email" | "email" | "id" | "public_id";
+  value: string | number;
 }
 
 export interface ICreateStudent {
   name: string;
+  public_id: string;
   email: string;
   password: string;
   celphone?: string;

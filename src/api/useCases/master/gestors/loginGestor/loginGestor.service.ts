@@ -39,13 +39,17 @@ export class LoginGestorService {
       };
     }
 
-    const token = this.handleToken.createToken(userFound.id, "gestor");
+    const token = this.handleToken.createToken({
+      public_id: userFound.public_id,
+      to: "gestor",
+    });
 
     return {
       user: {
         name: userFound.name,
+        office: userFound.office.title,
         email: userFound.email,
-        office: userFound.officeId,
+        office_id: userFound.officeId,
       },
       token,
     };

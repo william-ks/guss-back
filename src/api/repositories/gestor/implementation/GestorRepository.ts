@@ -60,7 +60,7 @@ export class GestorRepository implements IGestorRepository {
         },
       },
       orderBy: {
-        name: "asc",
+        id: "asc",
       },
     });
 
@@ -81,10 +81,20 @@ export class GestorRepository implements IGestorRepository {
   }
 
   async save(props: ISaveGestor): Promise<void> {
-    const { name, email, officeId, password, address, birthDate, cpf } = props;
+    const {
+      name,
+      public_id,
+      email,
+      officeId,
+      password,
+      address,
+      birthDate,
+      cpf,
+    } = props;
     await db.gestor.create({
       data: {
         name,
+        public_id,
         email,
         password,
         officeId,
@@ -96,11 +106,11 @@ export class GestorRepository implements IGestorRepository {
   }
 
   async toggleStatus(props: IToggleStatus): Promise<void> {
-    const { id, status } = props;
+    const { public_id, status } = props;
 
     await db.gestor.update({
       where: {
-        id,
+        public_id,
       },
       data: {
         is_active: status,

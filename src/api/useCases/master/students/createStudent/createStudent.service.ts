@@ -1,4 +1,5 @@
 import { schemaValidate } from "../../../../composables/handleSchemaValidate";
+import { idGenerator } from "../../../../composables/idGenerator";
 import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
 import { IStudentRepo } from "../../../../repositories/student/IStudentRepo";
 import { ICreateStudentDTO } from "./createStudent.DTO";
@@ -27,7 +28,9 @@ export class CreateStudentService {
 
     const password = this.handlePass.generatePass(7);
 
-    await this.studentRepository.create({ ...props, password });
+    const public_id = idGenerator();
+
+    await this.studentRepository.create({ ...props, password, public_id });
 
     return password;
   }
