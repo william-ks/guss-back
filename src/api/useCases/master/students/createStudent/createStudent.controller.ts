@@ -8,7 +8,7 @@ export class CreateStudentController {
     const { photo, name, email, celphone, cpf, address, birthday, class_time } =
       req.body;
 
-    await this.service.execute({
+    const password = await this.service.execute({
       photo,
       name,
       email,
@@ -19,6 +19,7 @@ export class CreateStudentController {
       class_time,
     });
 
-    return res.status(201).end();
+    return res.status(201).json(password);
+    // return res.status(201).end();
   }
 }

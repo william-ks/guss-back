@@ -1,20 +1,16 @@
 import { randomUUID } from "crypto";
-import { Feature } from "./Feature";
 
-export class Gestor {
+export class Student {
   public readonly id: string;
   public name: string;
   public email: string;
   public password: string;
-  public photo?: string;
+  public celphone?: string;
+  public cpf?: string;
   public birthDate?: string;
-  public officeId: string;
-  public started_at: Date;
-  public is_active: boolean;
+  public class_time?: string;
 
-  public UserFeatures?: Feature[];
-
-  constructor(props: Omit<Gestor, "id">, id?: string) {
+  constructor(props: Omit<Student, "id">, id?: string) {
     Object.assign(this, props);
 
     if (!id) {

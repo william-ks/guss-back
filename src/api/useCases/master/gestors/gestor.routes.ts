@@ -6,6 +6,7 @@ import { loginGestorController } from "./loginGestor";
 import { readOtherGestorController } from "./readOtherGestor";
 import { readSelfGestorController } from "./readSelfGestor";
 import { toggleStatusGestorController } from "./toggleStatusGestor";
+import { updateSelfGestorController } from "./updateSelf";
 
 const gestorRouter = Router();
 
@@ -25,11 +26,15 @@ gestorRouter.get("/read/other/:id", handleGestorLogin, async (req, res) => {
   return readOtherGestorController.handle(req, res);
 });
 
-gestorRouter.get("/read/all", (req, res) => {
+gestorRouter.get("/read/all", handleGestorLogin, (req, res) => {
   return listAllGestorsController.handle(req, res);
 });
 
-gestorRouter.post("/toggleStatus/:id", (req, res) => {
+gestorRouter.put("/update/self", handleGestorLogin, async (req, res) => {
+  return updateSelfGestorController.handle(req, res);
+});
+
+gestorRouter.post("/toggleStatus/:id", handleGestorLogin, (req, res) => {
   return toggleStatusGestorController.handle(req, res);
 });
 

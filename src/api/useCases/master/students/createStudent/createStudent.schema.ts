@@ -1,15 +1,35 @@
 import { z } from "zod";
+import { validateCpf } from "../../../../composables/validateCpf";
 
 export const createStudentSchema = z.object({
-  photo: z.string().min(10).nullable(),
+  photo: z.string().nullish(),
   name: z.string({ required_error: "O nome é obrigatório." }).min(3).max(50),
   email: z.string({ required_error: "O email é obrigatório." }).email(),
-  celphone: z.string().min(10).nullable(),
-  cpf: z.string().min(11, "Inválid CPF.").max(11, "Inválid CPF.").nullable(),
-  address: z.string().nullable(),
+  celphone: z.string().min(10).nullish(),
+  cpf: z
+    .string()
+    .min(11, "CPF fornecido é inválido.")
+    .max(11, "CPF fornecido é inválido.")
+    .nullish()
+    .refine(
+      (val) => {
+        if (val) {
+          try {
+            validateCpf(val);
+            return true;
+          } catch (e) {
+            return false;
+          }
+        }
+      },
+      {
+        message: "CPF fornecido é inválido.",
+      },
+    ),
+  address: z.string().nullish(),
   birthday: z
     .string()
-    .nullable()
+    .nullish()
     .refine(
       (val) => {
         if (val) {
@@ -47,5 +67,5 @@ export const createStudentSchema = z.object({
       },
       { message: "Data inválida." },
     ),
-  class_time: z.string().nullable(),
+  class_time: z.string().nullish(),
 });

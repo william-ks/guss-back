@@ -23,7 +23,7 @@ model Gestor {
   name       String
   email      String
   password   String
-  birthday   String?
+  birthDate  String?
   cpf        String?
   address    String?
   office     Office   @relation(fields: [officeId], references: [id])
@@ -32,4 +32,17 @@ model Gestor {
   started_at DateTime @default(now())
 
   @@map("gestors")
+}
+
+model Student {
+  id         String  @id @default(cuid())
+  name       String
+  email      String
+  password   String
+  celphone   String?
+  cpf        String?
+  birthDate  String?
+  class_time String?
+
+  @@map("students")
 }

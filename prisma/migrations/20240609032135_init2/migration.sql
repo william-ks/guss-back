@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "gestors" ADD COLUMN     "is_active" BOOLEAN NOT NULL DEFAULT true,
-ADD COLUMN     "started_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

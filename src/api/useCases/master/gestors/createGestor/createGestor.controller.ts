@@ -5,12 +5,15 @@ export class CreateGestorController {
   constructor(private readonly service: CreateGestorService) {}
 
   async handle(req: Request, res: Response) {
-    const { name, email, officeId } = req.body;
+    const { name, email, officeId, birthDate, cpf, address } = req.body;
 
     const gestor = await this.service.execute({
       name,
       email,
       officeId,
+      birthDate,
+      cpf,
+      address,
     });
 
     return res.status(201).json({

@@ -1,4 +1,5 @@
 export interface IToggleStatusGestorDTO {
   status: boolean;
-  gestorToToggle: string;
+  gestorToToggleId: string;
+  selfId: string;
 }

@@ -3,7 +3,7 @@ import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
 import { IGestorRepository } from "../../../../repositories/gestor/IGestorRepository";
 import { IOfficeRepository } from "../../../../repositories/office/IOfficeRepository";
 import { ICreateGestorDTO } from "./createGestor.DTO";
-import { createUserSchema } from "./createGestor.schema";
+import { createGestorSchema } from "./createGestor.schema";
 
 export class CreateGestorService {
   constructor(
@@ -13,21 +13,33 @@ export class CreateGestorService {
   ) {}
 
   async execute(props: ICreateGestorDTO) {
-    const { name, email, officeId } = props;
-    await schemaValidate({ name, email, officeId }, createUserSchema);
+    await schemaValidate(props, createGestorSchema);
+    const { email, officeId, cpf } = props;
 
     const emailAlreadyExists = await this.gestorRepository.findBy({
       key: "email",
       value: email,
     });
 
-    console.log(emailAlreadyExists);
-
     if (emailAlreadyExists) {
       throw {
         code: 400,
         message: "Este e-mail já existe.",
       };
+    }
+
+    if (cpf) {
+      const cpfAlreadyExists = await this.gestorRepository.findBy({
+        key: "cpf",
+        value: cpf,
+      });
+
+      if (cpfAlreadyExists) {
+        throw {
+          code: 400,
+          message: "Este cpf já existe.",
+        };
+      }
     }
 
     const officeFound = await this.officeRepository.find(officeId);
@@ -42,9 +54,7 @@ export class CreateGestorService {
     const password = this.handlePass.generatePass(12);
 
     await this.gestorRepository.save({
-      name,
-      email,
-      officeId,
+      ...props,
       password: await this.handlePass.encrypt(password),
     });
 

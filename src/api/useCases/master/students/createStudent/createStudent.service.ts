@@ -1,19 +1,19 @@
-import { schemaValidate } from "../../../functions/schemaValidate";
-import { IHandlePass } from "../../../providers/IHandlePass";
-import { IStudentRepository } from "../../../repositories/IStudentRepository";
+import { schemaValidate } from "../../../../composables/handleSchemaValidate";
+import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
+import { IStudentRepo } from "../../../../repositories/student/IStudentRepo";
 import { ICreateStudentDTO } from "./createStudent.DTO";
 import { createStudentSchema } from "./createStudent.schema";
 
 export class CreateStudentService {
   constructor(
-    private readonly studentRepository: IStudentRepository,
+    private readonly studentRepository: IStudentRepo,
     private readonly handlePass: IHandlePass,
   ) {}
 
   async execute(props: ICreateStudentDTO) {
     await schemaValidate(props, createStudentSchema);
 
-    const studentAlreadyExists = await this.studentRepository.find({
+    const studentAlreadyExists = await this.studentRepository.find_by({
       key: "email",
       value: props.email,
     });
@@ -28,5 +28,7 @@ export class CreateStudentService {
     const password = this.handlePass.generatePass(7);
 
     await this.studentRepository.create({ ...props, password });
+
+    return password;
   }
 }

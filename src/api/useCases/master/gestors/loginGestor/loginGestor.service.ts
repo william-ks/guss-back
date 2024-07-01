@@ -1,7 +1,9 @@
+import { schemaValidate } from "../../../../composables/handleSchemaValidate";
 import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
 import { IHandleToken } from "../../../../providers/tokens/IHandleToken";
 import { IGestorRepository } from "../../../../repositories/gestor/IGestorRepository";
 import { ILoginGestorDTO } from "./loginGestor.DTO";
+import { loginGestorSchema } from "./loginGestor.schema";
 
 export class LoginGestorService {
   constructor(
@@ -11,6 +13,8 @@ export class LoginGestorService {
   ) {}
 
   async execute({ email, password }: ILoginGestorDTO) {
+    await schemaValidate({ email, password }, loginGestorSchema);
+
     const userFound = await this.gestorRepository.findBy({
       key: "email",
       value: email,
