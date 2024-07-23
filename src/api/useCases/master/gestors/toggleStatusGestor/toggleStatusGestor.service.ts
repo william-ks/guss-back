@@ -11,13 +11,6 @@ export class ToggleStatusGestorSerice {
 
     const { status, gestorToToggleId, selfId } = props;
 
-    if (gestorToToggleId === selfId) {
-      throw {
-        code: 403,
-        message: "Não é possível alterar o status de si mesmo.",
-      };
-    }
-
     const gestor = await this.gestorRepository.findBy({
       key: "id",
       value: gestorToToggleId,
@@ -30,8 +23,15 @@ export class ToggleStatusGestorSerice {
       };
     }
 
+    if (gestor.id === selfId) {
+      throw {
+        code: 403,
+        message: "Não é possível alterar o status de si mesmo.",
+      };
+    }
+
     await this.gestorRepository.toggleStatus({
-      id: gestorToToggleId,
+      public_id: gestorToToggleId,
       status,
     });
   }

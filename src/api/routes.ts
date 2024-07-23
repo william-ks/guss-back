@@ -7,4 +7,3 @@ router.use("/master", masterRouter);
 router.use("/user", () => {});
 
 export { router };
-
