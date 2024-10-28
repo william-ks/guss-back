@@ -12,7 +12,7 @@ export class ToggleStatusGestorSerice {
     const { status, gestorToToggleId, selfId } = props;
 
     const gestor = await this.gestorRepository.findBy({
-      key: "id",
+      key: "public_id",
       value: gestorToToggleId,
     });
 
