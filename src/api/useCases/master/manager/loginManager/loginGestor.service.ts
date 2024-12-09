@@ -47,6 +47,7 @@ export class LoginManagerService {
     return {
       user: {
         name: userFound.name,
+        photo: userFound.photo,
         email: userFound.email,
         role: userFound.role.title,
       },
