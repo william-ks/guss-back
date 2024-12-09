@@ -1,52 +1,95 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../ERD.svg"
+}
+
 datasource db {
-  provider = "postgresql"
+  // provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-model Office {
-  id     Int      @id @default(autoincrement())
-  title  String
-  Gestor Gestor[]
+model Permission {
+  id                    Int                     @id @default(autoincrement())
+  name                  String
+  code                  String                  @unique
+  managerPermission     ManagerPermission[]
+  roleDefaultPermission RoleDefaultPermission[]
 
-  @@map("offices")
+  @@map("permissions")
 }
 
-model Gestor {
+model ManagerPermission {
+  id Int @id @default(autoincrement())
+
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  permissionId Int        @map("permission_id")
+
+  manager   Manager @relation(fields: [managerId], references: [id])
+  managerId Int     @map("manager_id")
+
+  @@map("manager_permissions")
+}
+
+model RoleDefaultPermission {
+  id Int @id @default(autoincrement())
+
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int  @map("role_id")
+
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  permissionId Int        @map("permission_id")
+
+  @@map("role_defalut_permissions")
+}
+
+model Role {
+  id                    Int                     @id @default(autoincrement())
+  title                 String
+  managers              Manager[]
+  roleDefaultPermission RoleDefaultPermission[]
+
+  @@map("roles")
+}
+
+model Manager {
   id        Int     @id @default(autoincrement())
   public_id String  @unique
+  photo     String?
   name      String
   email     String
   password  String
-  birthDate String?
+  birthday  String?
   cpf       String?
-  address   String?
 
-  office   Office @relation(fields: [officeId], references: [id])
-  officeId Int
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int  @map("role_id")
 
-  is_active  Boolean  @default(true)
+  isActive   Boolean  @default(true) @map("is_active")
   started_at DateTime @default(now())
 
-  @@map("gestors")
+  permissions ManagerPermission[]
+
+  @@map("managers")
 }
 
 model Student {
   id         Int     @id @default(autoincrement())
-  public_id String  @unique
+  public_id  String  @unique
   name       String
   email      String
   password   String
-  phone   String?
+  phone      String?
   cpf        String?
-  birthDate  String?
+  birthday   String?
   class_time String?
+
+  isActive   Boolean  @map("is_active")
+  started_at DateTime @default(now())
 
   @@map("students")
 }
