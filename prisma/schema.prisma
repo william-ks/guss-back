@@ -64,7 +64,7 @@ model Manager {
   email     String
   password  String
   birthday  String?
-  cpf       String?
+  cpf       String
 
   role   Role @relation(fields: [roleId], references: [id])
   roleId Int  @map("role_id")
