@@ -31,18 +31,16 @@ export class CreateManagerService {
       };
     }
 
-    if (props.cpf) {
-      const cpfAlreadyExists = await this.managerRepository.findBy({
-        key: "cpf",
-        value: props.cpf,
-      });
+    const cpfAlreadyExists = await this.managerRepository.findBy({
+      key: "cpf",
+      value: props.cpf,
+    });
 
-      if (cpfAlreadyExists) {
-        throw {
-          code: 400,
-          message: "Este cpf já existe.",
-        };
-      }
+    if (cpfAlreadyExists) {
+      throw {
+        code: 400,
+        message: "Este cpf já existe.",
+      };
     }
 
     const roleFound = await this.roleRepository.find(props.roleId);

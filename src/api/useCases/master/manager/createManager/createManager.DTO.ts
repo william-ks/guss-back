@@ -2,7 +2,7 @@ export interface ICreateManagerDTO {
   name: string;
   email: string;
   roleId: number;
-  cpf?: string;
+  cpf: string;
   birthday?: string;
   address?: string;
   permissions: number[];

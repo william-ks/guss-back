@@ -20,7 +20,6 @@ export const createManagerSchema = z.object({
     })
     .min(11, "Invalid CPF.")
     .max(11, "Invalid CPF.")
-    .nullish()
     .refine(
       (val) => {
         if (val) {
