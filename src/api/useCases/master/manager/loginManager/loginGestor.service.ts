@@ -47,7 +47,6 @@ export class LoginManagerService {
     return {
       user: {
         name: userFound.name,
-        office: userFound.role.title,
         email: userFound.email,
         role: userFound.role.title,
       },
