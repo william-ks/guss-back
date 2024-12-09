@@ -17,15 +17,15 @@ export class MemoryUserRepository implements IUserRepository {
   }
 
   async save(data: ISaveUser): Promise<void> {
-    const { name, email, officeId, password } = data;
+    const { name, email, roleId, password } = data;
 
     this.users.push(
       new User({
         name,
         email,
-        officeId,
+        roleId,
         password,
-        is_active: true,
+        isActive: true,
         started_at: new Date(),
         UserFeatures: [],
       }),
