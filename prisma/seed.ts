@@ -1,34 +1,110 @@
 import { PrismaClient } from "@prisma/client";
+import "dotenv/config";
+import bcrypt from "bcrypt";
+import { nanoid } from "nanoid";
 
 const prisma = new PrismaClient({});
 
-const main = async () => {
+const createPermissions = async () => {
   try {
-    const offices = await prisma.office.findMany();
+    const permissions = await prisma.permission.findMany();
 
-    if (offices.length <= 0) {
-      await prisma.office.createMany({
-        data: [
-          {
-            title: "Desenvolvedor",
+    const defaultPermissions = [
+      {
+        name: "Read Others Managers",
+        code: "read_other_manager",
+      },
+      {
+        name: "Create Managers",
+        code: "create_managers",
+      },
+    ];
+
+    if (permissions.length <= 0) {
+      for (const defaultPermission of defaultPermissions) {
+        await prisma.permission.create({
+          data: {
+            name: defaultPermission.name,
+            code: defaultPermission.code,
           },
-          {
-            title: "Proprietário",
+        });
+      }
+    }
+  } catch (e) {
+    throw "error createPermissions";
+  }
+};
+
+const createRoles = async () => {
+  try {
+    const roles = await prisma.role.findMany();
+
+    const defaultOffices = ["Developer", "Boss", "Admin", "Manager", "Teacher"];
+
+    if (roles.length <= 0) {
+      for (const defaultOffice of defaultOffices) {
+        await prisma.role.create({
+          data: {
+            title: defaultOffice,
           },
-          {
-            title: "Admin",
+        });
+      }
+    }
+  } catch (e) {
+    throw "error createRoles";
+  }
+};
+
+const createDefaultDev = async () => {
+  try {
+    const devs = await prisma.manager.findMany({
+      where: {
+        roleId: 1,
+      },
+    });
+
+    if (devs.length <= 0) {
+      const hash = await bcrypt.hash(
+        process.env.DEV_DEFAULT_PASS as string,
+        10,
+      );
+
+      await prisma.$transaction(async (prisma) => {
+        const manager = await prisma.manager.create({
+          data: {
+            public_id: nanoid(),
+            name: "Dev 01",
+            email: process.env.DEV_DEFAULT_EMAIL as string,
+            password: hash,
+            cpf: "000.000.000-00",
+            roleId: 1,
           },
-          {
-            title: "Gestor",
-          },
-          {
-            title: "Professor",
-          },
-        ],
+        });
+
+        const permissions = await prisma.permission.findMany();
+
+        for (const permission of permissions) {
+          await prisma.managerPermission.create({
+            data: {
+              managerId: manager.id,
+              permissionId: permission.id,
+            },
+          });
+        }
       });
     }
   } catch (e) {
-    return "error";
+    throw "error createDefaultDev";
+  }
+};
+
+const main = async () => {
+  try {
+    await createPermissions();
+    await createRoles();
+    await createDefaultDev();
+  } catch (e) {
+    throw "error main";
   }
 };
 
