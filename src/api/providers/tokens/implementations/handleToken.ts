@@ -5,8 +5,8 @@ export class HandleToken implements IHandleToken {
   createToken(props: ICreateToken): string {
     const { public_id, to } = props;
 
-    if (to === "gestor") {
-      const token = jwt.sign({}, process.env.JWT_PASS_GESTOR, {
+    if (to === "manager") {
+      const token = jwt.sign({}, process.env.JWT_PASS_MANAGER, {
         subject: public_id,
         expiresIn: "8h",
       });
@@ -22,9 +22,9 @@ export class HandleToken implements IHandleToken {
     }
   }
 
-  readToken(token: string, to: "gestor" | "student"): string {
-    if (to === "gestor") {
-      const { sub } = jwt.verify(token, process.env.JWT_PASS_GESTOR);
+  readToken(token: string, to: "manager" | "student"): string {
+    if (to === "manager") {
+      const { sub } = jwt.verify(token, process.env.JWT_PASS_MANAGER);
 
       return sub as string;
     } else {

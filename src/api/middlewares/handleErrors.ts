@@ -9,7 +9,7 @@ export const handleErrors = async (
   error: Error,
   req: Request,
   res: Response,
-  NextFunction: NextFunction,
+  next: NextFunction,
 ) => {
   const { message, code }: IError = error;
 

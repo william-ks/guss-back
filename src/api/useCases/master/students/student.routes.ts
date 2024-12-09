@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { handleGestorLogin } from "../../../middlewares/handleGestorLogin";
+import { handleManagerLogin } from "../../../middlewares/handleManagerLogin";
 import { createStudentController } from "./createStudent";
 
 const studentRouter = Router();
@@ -8,23 +8,23 @@ studentRouter.post("/login", async (req, res) => {
   return; //
 });
 
-studentRouter.post("/create", handleGestorLogin, async (req, res) => {
+studentRouter.post("/create", handleManagerLogin, async (req, res) => {
   return createStudentController.handle(req, res);
 });
 
-studentRouter.get("/read/self", handleGestorLogin, async (req, res) => {
+studentRouter.get("/read/self", handleManagerLogin, async (req, res) => {
   return; //
 });
 
-studentRouter.get("/read/other/:id", handleGestorLogin, async (req, res) => {
+studentRouter.get("/read/other/:id", handleManagerLogin, async (req, res) => {
   return; //
 });
 
-studentRouter.get("/read/all", handleGestorLogin, (req, res) => {
+studentRouter.get("/read/all", handleManagerLogin, (req, res) => {
   return; //
 });
 
-studentRouter.post("/toggleStatus/:id", handleGestorLogin, (req, res) => {
+studentRouter.post("/toggleStatus/:id", handleManagerLogin, (req, res) => {
   return; //
 });
 

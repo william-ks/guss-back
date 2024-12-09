@@ -6,7 +6,7 @@ export class ToggleStatusStudentController {
   async handle(req: Request, res: Response) {
     const { status } = req.body;
     const { id: studentToToggleId } = req.params;
-    const { id: selfId } = req.gestor;
+    const { id: selfId } = req.manager;
 
     await this.service.execute({ status, gestorToToggleId, selfId });
 

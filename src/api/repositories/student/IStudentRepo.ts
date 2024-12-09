@@ -12,7 +12,7 @@ export interface ICreateStudent {
   password: string;
   celphone?: string;
   cpf?: string;
-  birthDate?: string;
+  birthday?: string;
   class_time?: string;
 }
 
