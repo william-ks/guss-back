@@ -6,12 +6,18 @@ export class UpdateOtherController {
   constructor(private readonly service: UpdateOtherService) {}
 
   async handle(req: Request, res: Response) {
-    const { permissions } = req.body;
+    const { name, roleId, email, photo, birthday, cpf, permissions } = req.body;
     const { id: managerPublicId } = req.params;
     const actualManager = req.manager;
 
     await this.service.execute({
       managerPublicId,
+      name,
+      roleId,
+      email,
+      photo,
+      birthday,
+      cpf,
       permissions,
       actualManager: actualManager as Manager,
     });

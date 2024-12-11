@@ -1,22 +1,24 @@
+import { updateSelfManagerSchema } from "./updateSelfManager.schema";
 import { IManagerRepository } from "../../../../repositories/manager/IManagerRepository";
 import { IUpdateSelfManagerDTO } from "./updateSelfManager.DTO";
+import { schemaValidate } from "../../../../composables/handleSchemaValidate";
 
 type TUpdatableFields = "email" | "cpf";
 
-interface IDataToUpdate extends Partial<IUpdateSelfManagerDTO> {
-  permissionsAdd?: number[];
-  permissionsRemove?: number[];
-}
+interface IDataToUpdate extends Partial<IUpdateSelfManagerDTO> {}
 
 export class UpdateSelfManagerService {
   constructor(private readonly managerRepository: IManagerRepository) {}
 
   async execute(props: IUpdateSelfManagerDTO) {
-    const { id, name, email, birthday, photo, cpf, permissions } = props;
+    await schemaValidate(props, updateSelfManagerSchema);
+    const { id, name, roleId, email, birthday, photo, cpf, permissions } =
+      props;
 
     const dataToUpdate: IDataToUpdate = {
       name,
       email,
+      roleId,
       birthday,
       cpf,
       photo,
@@ -42,17 +44,20 @@ export class UpdateSelfManagerService {
     const checks: {
       key: TUpdatableFields;
       value: string | undefined;
-      message: string;
+      message1: string;
+      message2: string;
     }[] = [
       {
         key: "email",
         value: email,
-        message: "Já existe um gestor com esse email cadastrado.",
+        message1: "Já existe um gestor com esse email cadastrado.",
+        message2: "This field can't be null",
       },
       {
         key: "cpf",
         value: cpf,
-        message: "Já existe um gestor com esse CPF cadastrado.",
+        message1: "Já existe um gestor com esse CPF cadastrado.",
+        message2: "This field can't be null",
       },
     ];
 
@@ -67,9 +72,14 @@ export class UpdateSelfManagerService {
         if (alreadyExists) {
           throw {
             code: 400,
-            message: check.message,
+            message: check.message1,
           };
         }
+      } else if (check.value === "") {
+        throw {
+          code: 400,
+          message: check.message2,
+        };
       }
     }
 

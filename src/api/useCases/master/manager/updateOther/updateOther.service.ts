@@ -1,5 +1,6 @@
 import { IManagerRepository } from "../../../../repositories/manager/IManagerRepository";
 import { IPermissionRepository } from "../../../../repositories/permissions/IPermissionRepository";
+import { IRoleRepository } from "../../../../repositories/role/IRoleRepository";
 import { UpdateSelfManagerService } from "../updateSelf/updateSelfManager.service";
 import { IUpdateOtherDTO } from "./updateOther.DTO";
 
@@ -8,6 +9,7 @@ export class UpdateOtherService {
     private managerRepository: IManagerRepository,
     private permissionRepository: IPermissionRepository,
     private updateManagerService: UpdateSelfManagerService,
+    private roleRepository: IRoleRepository,
   ) {}
 
   async verifyPermissions(props: IUpdatePermissions) {
@@ -42,25 +44,13 @@ export class UpdateOtherService {
         };
       }
 
-      // const managerToUpdateHaveThisPermission =
-      //     managerToUpdatePermissions.find((permission) => {
-      //       return permission.id === permission.id;
-      //     });
-
-      //   if (!managerToUpdateHaveThisPermission) {
-      //     throw {
-      //       code: 400,
-      //       message: "Manager already have this permission",
-      //     };
-      //   }
-
       if (permission.toAdd && !permission.toRemove) {
         const managerToUpdateHaveThisPermission =
           managerToUpdatePermissions.find((permission) => {
             return permission.id === permission.id;
           });
 
-        if (!managerToUpdateHaveThisPermission) {
+        if (managerToUpdateHaveThisPermission) {
           throw {
             code: 400,
             message: "Manager already have this permission",
@@ -100,6 +90,17 @@ export class UpdateOtherService {
         code: 404,
         message: "User not found.",
       };
+    }
+
+    if (props.roleId) {
+      const roleExitst = await this.roleRepository.find(props.roleId);
+
+      if (!roleExitst) {
+        throw {
+          code: 404,
+          message: "Role not found.",
+        };
+      }
     }
 
     if (managertoUpdate.public_id === actualManager.public_id) {
