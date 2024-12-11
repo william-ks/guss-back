@@ -18,13 +18,14 @@ export const createManagerSchema = z.object({
     .string({
       required_error: "O CPF é obrigatório.",
     })
-    .min(11, "Invalid CPF.")
-    .max(11, "Invalid CPF.")
+    .min(14, "Invalid CPF.")
+    .max(14, "Invalid CPF.")
     .refine(
       (val) => {
         if (val) {
           try {
-            validateCpf(val);
+            const cpf = val.split(".").join("").split("-").join("");
+            validateCpf(cpf);
             return true;
           } catch (e) {
             return false;

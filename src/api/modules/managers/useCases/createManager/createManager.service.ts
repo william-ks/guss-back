@@ -1,9 +1,9 @@
 import { schemaValidate } from "../../../../composables/handleSchemaValidate";
 import { idGenerator } from "../../../../composables/idGenerator";
 import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
-import { IManagerRepository } from "../../../../repositories/manager/managers/repository/IManagerRepository";
-import { IPermissionRepository } from "../../../../repositories/permissions/IPermissionRepository";
-import { IRoleRepository } from "../../../../repositories/role/IRoleRepository";
+import { IPermissionRepository } from "../../../permissions/repository/IPermissionRepository";
+import { IRoleRepository } from "../../../roles/repository/IRoleRepository";
+import { IManagerRepository } from "../../repository/IManagerRepository";
 import { ICreateManagerDTO } from "./createManager.DTO";
 import { createManagerSchema } from "./createManager.schema";
 

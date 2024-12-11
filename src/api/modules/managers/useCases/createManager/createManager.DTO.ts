@@ -8,7 +8,5 @@ export interface ICreateManagerDTO {
   permissions: number[];
   managerPermissions: {
     id: number;
-    name: string;
-    code: string;
   }[];
 }
