@@ -82,7 +82,39 @@ export class ManagerRepository implements IManagerRepository {
   }
 
   async update(props: IUpdateManager): Promise<void> {
-    const { id, ...dataToUpdate } = props;
+    const { id, permissions, ...dataToUpdate } = props;
+
+    if (permissions && permissions.length > 0) {
+      for (const permission of permissions) {
+        const exists = await db.managerPermission.findFirst({
+          where: {
+            managerId: id,
+            permissionId: permission.id,
+          },
+        });
+
+        if (permission.toAdd && !permission.toRemove) {
+          await db.managerPermission.create({
+            data: {
+              managerId: id,
+              permissionId: permission.id,
+            },
+          });
+        } else if (permission.toRemove && !permission.toAdd) {
+          await db.managerPermission.deleteMany({
+            where: {
+              managerId: id,
+              permissionId: permission.id,
+            },
+          });
+        } else {
+          throw {
+            code: 400,
+            message: "Error on update user",
+          };
+        }
+      }
+    }
 
     await db.manager.update({
       data: {

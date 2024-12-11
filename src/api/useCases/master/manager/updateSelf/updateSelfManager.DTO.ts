@@ -5,4 +5,9 @@ export interface IUpdateSelfManagerDTO {
   email?: string;
   birthday?: string;
   cpf?: string;
+  permissions?: {
+    id: number;
+    toAdd: boolean;
+    toRemove: boolean;
+  }[];
 }

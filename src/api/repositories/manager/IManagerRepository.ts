@@ -27,6 +27,11 @@ export interface IUpdateManager {
   cpf?: string;
   birthday?: string;
   address?: string;
+  permissions?: {
+    id: number;
+    toAdd: boolean;
+    toRemove: boolean;
+  }[];
 }
 
 export interface IToggleStatus {

@@ -3,23 +3,33 @@ import { IUpdateSelfManagerDTO } from "./updateSelfManager.DTO";
 
 type TUpdatableFields = "email" | "cpf";
 
+interface IDataToUpdate extends Partial<IUpdateSelfManagerDTO> {
+  permissionsAdd?: number[];
+  permissionsRemove?: number[];
+}
+
 export class UpdateSelfManagerService {
   constructor(private readonly managerRepository: IManagerRepository) {}
 
   async execute(props: IUpdateSelfManagerDTO) {
-    const { id, name, email, birthday, photo, cpf } = props;
+    const { id, name, email, birthday, photo, cpf, permissions } = props;
 
-    const dataToUpdate: Omit<IUpdateSelfManagerDTO, "id"> = {
+    const dataToUpdate: IDataToUpdate = {
       name,
       email,
       birthday,
       cpf,
       photo,
+      permissions,
     };
 
-    const fieldsToUpdate = Object.keys(dataToUpdate).filter(
-      (key) => dataToUpdate[key] !== undefined,
-    );
+    const fieldsToUpdate = Object.keys(dataToUpdate).filter((key) => {
+      if (key !== "permissions") {
+        return dataToUpdate[key] !== undefined;
+      } else {
+        return dataToUpdate[key] !== undefined && permissions.length > 0;
+      }
+    });
 
     if (fieldsToUpdate.length <= 0) {
       throw {
