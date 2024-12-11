@@ -86,7 +86,7 @@ export class ManagerRepository implements IManagerRepository {
 
     if (permissions && permissions.length > 0) {
       for (const permission of permissions) {
-        const exists = await db.managerPermission.findFirst({
+        await db.managerPermission.findFirst({
           where: {
             managerId: id,
             permissionId: permission.id,
