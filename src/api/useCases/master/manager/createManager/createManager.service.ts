@@ -54,7 +54,7 @@ export class CreateManagerService {
 
     if (props.permissions.length >= 1) {
       for (const permissionId of props.permissions) {
-        const found = await this.permissionRepository.find(permissionId);
+        const found = await this.permissionRepository.findById(permissionId);
 
         const foundIntoActualManager = managerPermissions.find((el) => {
           return el.id === permissionId;
