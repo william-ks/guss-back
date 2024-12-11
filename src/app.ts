@@ -21,7 +21,7 @@ class App {
   }
 
   private routes(): void {
-    this.express.use(router);
+    this.express.use("/api", router);
     this.express.use(handleErrors);
   }
 }

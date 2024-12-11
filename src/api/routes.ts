@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { masterRouter } from "./useCases/master/master.routes";
+import { managerRouter } from "./modules/managers/manager.routes";
 
 const router = Router();
 
-router.use("/master", masterRouter);
-router.use("/user", () => {});
+router.use("/master/manager", managerRouter);
 
 export { router };

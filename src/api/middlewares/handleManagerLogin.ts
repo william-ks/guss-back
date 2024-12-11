@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { HandleToken } from "../providers/tokens/implementations/handleToken";
-import { ManagerRepository } from "../repositories/manager/implementation/ManagerRepository";
+import { ManagerRepository } from "../modules/managers/repository/implementation/ManagerRepository";
 
 export const handleManagerLogin = async (
   req: Request,
