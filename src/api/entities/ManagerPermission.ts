@@ -2,7 +2,7 @@ import { Manager } from "./Manager";
 import { Permission } from "./Permission";
 
 export class ManagerPermission {
-  public readonly id?: number;
+  public readonly id: number;
 
   public permission?: Permission;
   public permissionId: number;
