@@ -25,7 +25,7 @@ export class ToggleStatusManagerService {
 
     if (manager.id === selfId) {
       throw {
-        code: 403,
+        code: 401,
         message: "Não é possível alterar o status de si mesmo.",
       };
     }
