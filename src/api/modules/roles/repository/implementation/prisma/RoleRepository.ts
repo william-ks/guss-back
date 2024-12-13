@@ -8,13 +8,20 @@ export class RoleRepository implements IRoleRepository {
       where: {
         id,
       },
+      include: {
+        roleDefaultPermission: true,
+      },
     });
 
     return role;
   }
 
   async findAll(): Promise<Role[]> {
-    const roles = await prismaDb.role.findMany();
+    const roles = await prismaDb.role.findMany({
+      include: {
+        roleDefaultPermission: true,
+      },
+    });
 
     return roles;
   }
