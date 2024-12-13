@@ -25,7 +25,7 @@ export const handleManagerLogin = async (
     const managerId = handleToken.readToken(token, "manager");
 
     const manager = await managerRepository.findBy({
-      key: "public_id",
+      key: "publicId",
       value: managerId,
     });
 

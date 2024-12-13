@@ -77,11 +77,11 @@ export class CreateManagerService {
     }
 
     const password = this.handlePass.generatePass(12);
-    const public_id = idGenerator();
+    const publicId = idGenerator();
 
     await this.managerRepository.save({
       ...newManager,
-      public_id,
+      publicId,
       password: await this.handlePass.encrypt(password),
     });
 

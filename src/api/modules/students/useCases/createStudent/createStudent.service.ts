@@ -28,9 +28,9 @@ export class CreateStudentService {
 
     const password = this.handlePass.generatePass(7);
 
-    const public_id = idGenerator();
+    const publicId = idGenerator();
 
-    await this.studentRepository.create({ ...props, password, public_id });
+    await this.studentRepository.create({ ...props, password, publicId });
 
     return password;
   }

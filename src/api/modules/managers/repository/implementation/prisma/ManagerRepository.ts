@@ -127,11 +127,11 @@ export class ManagerRepository implements IManagerRepository {
   }
 
   async save(props: ISaveManager): Promise<void> {
-    const { name, public_id, email, roleId, password, birthday, cpf } = props;
+    const { name, publicId, email, roleId, password, birthday, cpf } = props;
     await prismaDb.manager.create({
       data: {
         name,
-        public_id,
+        publicId,
         email,
         password,
         roleId,
@@ -142,11 +142,11 @@ export class ManagerRepository implements IManagerRepository {
   }
 
   async toggleStatus(props: IToggleStatus): Promise<void> {
-    const { public_id, status } = props;
+    const { publicId, status } = props;
 
     await prismaDb.manager.update({
       where: {
-        public_id,
+        publicId,
       },
       data: {
         isActive: status,

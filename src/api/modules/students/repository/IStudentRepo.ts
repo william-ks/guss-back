@@ -1,13 +1,13 @@
 import { Student } from "../model/Student";
 
 export interface IFindBy {
-  key: "email" | "email" | "id" | "public_id";
+  key: "email" | "email" | "id" | "publicId";
   value: string | number;
 }
 
 export interface ICreateStudent {
   name: string;
-  public_id: string;
+  publicId: string;
   email: string;
   password: string;
   phone?: string;

@@ -12,7 +12,7 @@ export class ToggleStatusManagerService {
     const { status, managerToToggleId, selfId } = props;
 
     const manager = await this.managerRepository.findBy({
-      key: "public_id",
+      key: "publicId",
       value: managerToToggleId,
     });
 
@@ -31,7 +31,7 @@ export class ToggleStatusManagerService {
     }
 
     await this.managerRepository.toggleStatus({
-      public_id: managerToToggleId,
+      publicId: managerToToggleId,
       status,
     });
   }

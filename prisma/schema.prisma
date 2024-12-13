@@ -57,14 +57,14 @@ model Role {
 }
 
 model Manager {
-  id        Int     @id @default(autoincrement())
-  public_id String  @unique
-  photo     String?
-  name      String
-  email     String
-  password  String
-  birthday  String?
-  cpf       String
+  id       Int     @id @default(autoincrement())
+  publicId String  @unique @map("public_id")
+  photo    String?
+  name     String
+  email    String
+  password String
+  birthday String?
+  cpf      String
 
   role   Role @relation(fields: [roleId], references: [id])
   roleId Int  @map("role_id")
@@ -79,7 +79,7 @@ model Manager {
 
 model Student {
   id         Int     @id @default(autoincrement())
-  public_id  String  @unique
+  publicId   String  @unique @map("public_id")
   name       String
   email      String
   password   String

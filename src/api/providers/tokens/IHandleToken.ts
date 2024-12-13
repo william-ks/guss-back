@@ -4,6 +4,6 @@ export interface IHandleToken {
 }
 
 export interface ICreateToken {
-  public_id: string;
+  publicId: string;
   to: "manager" | "student";
 }

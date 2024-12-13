@@ -6,7 +6,7 @@ export class ReadOtherManagerService {
 
   async execute({ wantedId }: IReadOtherManagerDTO) {
     const foundedManager = await this.managerRepository.findBy({
-      key: "public_id",
+      key: "publicId",
       value: wantedId,
     });
 

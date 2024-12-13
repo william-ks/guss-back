@@ -10,7 +10,7 @@ export interface IManagerRepository {
 }
 
 export interface IFindBy {
-  key: "email" | "id" | "cpf" | "public_id";
+  key: "email" | "id" | "cpf" | "publicId";
   value: string | number;
 }
 
@@ -35,12 +35,12 @@ export interface IUpdateManager {
 }
 
 export interface IToggleStatus {
-  public_id: string;
+  publicId: string;
   status: boolean;
 }
 
 export interface ISaveManager {
-  public_id: string;
+  publicId: string;
   name: string;
   email: string;
   roleId: number;

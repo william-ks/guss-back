@@ -3,18 +3,18 @@ import { ICreateToken, IHandleToken } from "../../tokens/IHandleToken";
 
 export class HandleToken implements IHandleToken {
   createToken(props: ICreateToken): string {
-    const { public_id, to } = props;
+    const { publicId, to } = props;
 
     if (to === "manager") {
       const token = jwt.sign({}, process.env.JWT_PASS_MANAGER, {
-        subject: public_id,
+        subject: publicId,
         expiresIn: "8h",
       });
 
       return token;
     } else {
       const token = jwt.sign({}, process.env.JWT_PASS_STUDENT, {
-        subject: public_id,
+        subject: publicId,
         expiresIn: "8h",
       });
 

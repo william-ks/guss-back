@@ -72,7 +72,7 @@ const createDefaultDev = async () => {
       await prisma.$transaction(async (prisma) => {
         const manager = await prisma.manager.create({
           data: {
-            public_id: nanoid(),
+            publicId: nanoid(),
             name: "Dev 01",
             email: process.env.DEV_DEFAULT_EMAIL as string,
             password: hash,

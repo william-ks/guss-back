@@ -40,7 +40,7 @@ export class LoginManagerService {
     }
 
     const token = this.handleToken.createToken({
-      public_id: userFound.public_id,
+      publicId: userFound.publicId,
       to: "manager",
     });
 

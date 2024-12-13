@@ -4,7 +4,7 @@ import { Role } from "../../roles/model/Role";
 
 export class Manager {
   public readonly id?: number;
-  public readonly public_id: string;
+  public readonly publicId: string;
   public photo?: string;
   public name: string;
   public cpf: string;
@@ -17,13 +17,13 @@ export class Manager {
   public isActive: boolean;
   public permissions?: ManagerPermission[];
 
-  constructor(props: Omit<Manager, "public_id">, public_id?: string) {
+  constructor(props: Omit<Manager, "publicId">, publicId?: string) {
     Object.assign(this, props);
 
-    if (!public_id) {
-      this.public_id = idGenerator();
+    if (!publicId) {
+      this.publicId = idGenerator();
     } else {
-      this.public_id = public_id;
+      this.publicId = publicId;
     }
   }
 }

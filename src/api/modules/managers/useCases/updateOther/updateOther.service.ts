@@ -81,7 +81,7 @@ export class UpdateOtherService {
     const { actualManager, managerPublicId, ...dataToUpdate } = props;
 
     const managertoUpdate = await this.managerRepository.findBy({
-      key: "public_id",
+      key: "publicId",
       value: managerPublicId,
     });
 
@@ -103,7 +103,7 @@ export class UpdateOtherService {
       }
     }
 
-    if (managertoUpdate.public_id === actualManager.public_id) {
+    if (managertoUpdate.publicId === actualManager.publicId) {
       throw {
         code: 401,
         message: "You can't update your own profile here",

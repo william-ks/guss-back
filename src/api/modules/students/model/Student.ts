@@ -2,7 +2,7 @@ import { idGenerator } from "../../../composables/idGenerator";
 
 export class Student {
   public readonly id?: number;
-  public readonly public_id: string;
+  public readonly publicId: string;
   public name: string;
   public email: string;
   public password: string;
@@ -11,13 +11,13 @@ export class Student {
   public birthday?: string;
   public class_time?: string;
 
-  constructor(props: Omit<Student, "public_id">, public_id?: string) {
+  constructor(props: Omit<Student, "publicId">, publicId?: string) {
     Object.assign(this, props);
 
-    if (!public_id) {
-      this.public_id = idGenerator();
+    if (!publicId) {
+      this.publicId = idGenerator();
     } else {
-      this.public_id = public_id;
+      this.publicId = publicId;
     }
   }
 }
