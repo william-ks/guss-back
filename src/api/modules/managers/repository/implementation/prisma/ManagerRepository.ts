@@ -1,5 +1,5 @@
-import { db } from "../../../../../config/prisma";
-import { Manager } from "../../model/Manager";
+import { prismaDb } from "../../../../../../config/prisma";
+import { Manager } from "../../../model/Manager";
 import {
   IFindAnother,
   IFindBy,
@@ -7,11 +7,11 @@ import {
   ISaveManager,
   IToggleStatus,
   IUpdateManager,
-} from "../IManagerRepository";
+} from "../../IManagerRepository";
 
 export class ManagerRepository implements IManagerRepository {
   async findBy({ key, value }: IFindBy): Promise<Manager> {
-    const found = await db.manager.findFirst({
+    const found = await prismaDb.manager.findFirst({
       where: {
         [key]: value,
       },
@@ -33,7 +33,7 @@ export class ManagerRepository implements IManagerRepository {
   }
 
   async findAnother({ id, key, value }: IFindAnother): Promise<Manager> {
-    const found = await db.manager.findFirst({
+    const found = await prismaDb.manager.findFirst({
       where: {
         [key]: value,
         AND: {
@@ -60,7 +60,7 @@ export class ManagerRepository implements IManagerRepository {
   }
 
   async findAll(): Promise<Manager[]> {
-    const managers = await db.manager.findMany({
+    const managers = await prismaDb.manager.findMany({
       include: {
         role: {
           select: {
@@ -86,7 +86,7 @@ export class ManagerRepository implements IManagerRepository {
 
     if (permissions && permissions.length > 0) {
       for (const permission of permissions) {
-        await db.managerPermission.findFirst({
+        await prismaDb.managerPermission.findFirst({
           where: {
             managerId: id,
             permissionId: permission.id,
@@ -94,14 +94,14 @@ export class ManagerRepository implements IManagerRepository {
         });
 
         if (permission.toAdd && !permission.toRemove) {
-          await db.managerPermission.create({
+          await prismaDb.managerPermission.create({
             data: {
               managerId: id,
               permissionId: permission.id,
             },
           });
         } else if (permission.toRemove && !permission.toAdd) {
-          await db.managerPermission.deleteMany({
+          await prismaDb.managerPermission.deleteMany({
             where: {
               managerId: id,
               permissionId: permission.id,
@@ -116,7 +116,7 @@ export class ManagerRepository implements IManagerRepository {
       }
     }
 
-    await db.manager.update({
+    await prismaDb.manager.update({
       data: {
         ...dataToUpdate,
       },
@@ -128,7 +128,7 @@ export class ManagerRepository implements IManagerRepository {
 
   async save(props: ISaveManager): Promise<void> {
     const { name, public_id, email, roleId, password, birthday, cpf } = props;
-    await db.manager.create({
+    await prismaDb.manager.create({
       data: {
         name,
         public_id,
@@ -144,7 +144,7 @@ export class ManagerRepository implements IManagerRepository {
   async toggleStatus(props: IToggleStatus): Promise<void> {
     const { public_id, status } = props;
 
-    await db.manager.update({
+    await prismaDb.manager.update({
       where: {
         public_id,
       },

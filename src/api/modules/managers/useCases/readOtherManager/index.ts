@@ -1,4 +1,4 @@
-import { ManagerRepository } from "../../repository/implementation/ManagerRepository";
+import { ManagerRepository } from "../../repository/implementation/prisma/ManagerRepository";
 import { ReadOtherManagerService } from "./readOther.Service";
 import { ReadOtherManagerController } from "./readOther.controller";
 

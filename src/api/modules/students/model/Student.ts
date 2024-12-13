@@ -1,4 +1,4 @@
-import { idGenerator } from "../composables/idGenerator";
+import { idGenerator } from "../../../composables/idGenerator";
 
 export class Student {
   public readonly id?: number;
@@ -6,7 +6,7 @@ export class Student {
   public name: string;
   public email: string;
   public password: string;
-  public celphone?: string;
+  public phone?: string;
   public cpf?: string;
   public birthday?: string;
   public class_time?: string;

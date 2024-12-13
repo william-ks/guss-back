@@ -1,4 +1,4 @@
-import { ManagerRepository } from "../../repository/implementation/ManagerRepository";
+import { ManagerRepository } from "../../repository/implementation/prisma/ManagerRepository";
 import { UpdateSelfManagerController } from "./updateSelfManager.controller";
 import { UpdateSelfManagerService } from "./updateSelfManager.service";
 

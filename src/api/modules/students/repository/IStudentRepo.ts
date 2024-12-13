@@ -1,4 +1,4 @@
-import { Student } from "../../entities/Student";
+import { Student } from "../model/Student";
 
 export interface IFindBy {
   key: "email" | "email" | "id" | "public_id";
@@ -10,7 +10,7 @@ export interface ICreateStudent {
   public_id: string;
   email: string;
   password: string;
-  celphone?: string;
+  phone?: string;
   cpf?: string;
   birthday?: string;
   class_time?: string;

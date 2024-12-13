@@ -1,6 +1,6 @@
-import { PermissionRepository } from "../../../permissions/repository/implementation/PermissionRepository";
-import { RoleRepository } from "../../../roles/repository/implementation/RoleRepository";
-import { ManagerRepository } from "../../repository/implementation/ManagerRepository";
+import { PermissionRepository } from "../../../permissions/repository/implementation/prisma/PermissionRepository";
+import { RoleRepository } from "../../../roles/repository/implementation/prisma/RoleRepository";
+import { ManagerRepository } from "../../repository/implementation/prisma/ManagerRepository";
 import { UpdateSelfManagerService } from "../updateSelf/updateSelfManager.service";
 import { UpdateOtherController } from "./updateOther.controller";
 import { UpdateOtherService } from "./updateOther.service";

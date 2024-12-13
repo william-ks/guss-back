@@ -1,6 +1,6 @@
 import { HandlePass } from "../../../../providers/passwords/implementations/HandlePass";
 import { HandleToken } from "../../../../providers/tokens/implementations/handleToken";
-import { ManagerRepository } from "../../repository/implementation/ManagerRepository";
+import { ManagerRepository } from "../../repository/implementation/prisma/ManagerRepository";
 import { LoginManagerController } from "./loginGestor.controller";
 import { LoginManagerService } from "./loginGestor.service";
 
