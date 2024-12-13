@@ -88,7 +88,7 @@ model Student {
   birthday   String?
   class_time String?
 
-  isActive   Boolean  @map("is_active")
+  isActive   Boolean  @default(true) @map("is_active")
   started_at DateTime @default(now())
 
   @@map("students")
