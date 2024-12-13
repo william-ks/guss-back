@@ -12,4 +12,10 @@ export class RoleRepository implements IRoleRepository {
 
     return role;
   }
+
+  async findAll(): Promise<Role[]> {
+    const roles = await prismaDb.role.findMany();
+
+    return roles;
+  }
 }
