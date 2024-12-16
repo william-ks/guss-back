@@ -1,9 +1,13 @@
 import { prismaDb } from "../../../../../../config/prisma";
 import { Student } from "../../../model/Student";
-import { ICreateStudent, IFindBy, IStudentRepo } from "../../IStudentRepo";
+import {
+  ICreateStudent,
+  IFindBy,
+  IStudentRepository,
+} from "../../IStudentRepository";
 
-export class StudentRepo implements IStudentRepo {
-  async find_by({ key, value }: IFindBy): Promise<Student> {
+export class StudentRepository implements IStudentRepository {
+  async findBy({ key, value }: IFindBy): Promise<Student> {
     const student = await prismaDb.student.findFirst({
       where: {
         [key]: value,

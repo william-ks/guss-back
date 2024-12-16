@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { handleManagerLogin } from "../../middlewares/handleManagerLogin";
+import { handlePermissions } from "../../middlewares/handlePermissions";
 import { createManagerController } from "./useCases/createManager";
 import { listAllManagerController } from "./useCases/listAllManager";
 import { loginManagerController } from "./useCases/loginManager";
 import { readOtherManagerController } from "./useCases/readOtherManager";
 import { readSelfManagerController } from "./useCases/readSelfManager";
 import { toggleStatusManagerController } from "./useCases/toggleStatusManager";
-import { updateSelfManagerController } from "./useCases/updateSelf";
-import { handlePermissions } from "../../middlewares/handlePermissions";
 import { updateOtherController } from "./useCases/updateOther";
+import { updateSelfManagerController } from "./useCases/updateSelf";
 
 const managerRouter = Router();
 

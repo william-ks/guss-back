@@ -16,7 +16,7 @@ export interface ICreateStudent {
   class_time?: string;
 }
 
-export interface IStudentRepo {
-  find_by({ key, value }: IFindBy): Promise<Student>;
+export interface IStudentRepository {
+  findBy({ key, value }: IFindBy): Promise<Student>;
   create(data: ICreateStudent): Promise<void>;
 }
