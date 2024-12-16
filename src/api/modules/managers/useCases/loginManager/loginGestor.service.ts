@@ -1,7 +1,7 @@
 import { schemaValidate } from "../../../../composables/handleSchemaValidate";
 import { IHandlePass } from "../../../../providers/passwords/IHandlePass";
 import { IHandleToken } from "../../../../providers/tokens/IHandleToken";
-import { IManagerRepository } from "../../../../repositories/manager/managers/repository/IManagerRepository";
+import { IManagerRepository } from "../../repository/IManagerRepository";
 import { ILoginManagerDTO } from "./loginGestor.DTO";
 import { loginManagerSchema } from "./loginGestor.schema";
 
@@ -44,12 +44,24 @@ export class LoginManagerService {
       to: "manager",
     });
 
+    const permissions = userFound.permissions.map((el) => {
+      return {
+        id: el.id,
+        name: el.permission.name,
+      };
+    });
+
     return {
       user: {
+        id: userFound.publicId,
         name: userFound.name,
         photo: userFound.photo,
         email: userFound.email,
-        role: userFound.role.title,
+        role: {
+          id: userFound.role.id,
+          title: userFound.role.title,
+        },
+        permissions: userFound.permissions,
       },
       token,
     };

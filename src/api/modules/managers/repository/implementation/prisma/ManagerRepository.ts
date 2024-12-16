@@ -16,11 +16,7 @@ export class ManagerRepository implements IManagerRepository {
         [key]: value,
       },
       include: {
-        role: {
-          select: {
-            title: true,
-          },
-        },
+        role: true,
         permissions: {
           include: {
             permission: true,
@@ -43,11 +39,7 @@ export class ManagerRepository implements IManagerRepository {
         },
       },
       include: {
-        role: {
-          select: {
-            title: true,
-          },
-        },
+        role: true,
         permissions: {
           include: {
             permission: true,
@@ -62,11 +54,7 @@ export class ManagerRepository implements IManagerRepository {
   async findAll(): Promise<Manager[]> {
     const managers = await prismaDb.manager.findMany({
       include: {
-        role: {
-          select: {
-            title: true,
-          },
-        },
+        role: true,
         permissions: {
           include: {
             permission: true,

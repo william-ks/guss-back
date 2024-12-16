@@ -1,6 +1,6 @@
-import { IManagerRepository } from "../../../../repositories/manager/managers/repository/IManagerRepository";
-import { IPermissionRepository } from "../../../../repositories/permissions/IPermissionRepository";
-import { IRoleRepository } from "../../../../repositories/role/IRoleRepository";
+import { IPermissionRepository } from "../../../permissions/repository/IPermissionRepository";
+import { IRoleRepository } from "../../../roles/repository/IRoleRepository";
+import { IManagerRepository } from "../../repository/IManagerRepository";
 import { UpdateSelfManagerService } from "../updateSelf/updateSelfManager.service";
 import { IUpdateOtherDTO } from "./updateOther.DTO";
 
@@ -46,8 +46,8 @@ export class UpdateOtherService {
 
       if (permission.toAdd && !permission.toRemove) {
         const managerToUpdateHaveThisPermission =
-          managerToUpdatePermissions.find((permission) => {
-            return permission.id === permission.id;
+          managerToUpdatePermissions.find((el) => {
+            return el.permissionId === permission.id;
           });
 
         if (managerToUpdateHaveThisPermission) {
@@ -62,7 +62,7 @@ export class UpdateOtherService {
             return permission.id === permission.id;
           });
 
-        if (managerToUpdateHaveThisPermission) {
+        if (!managerToUpdateHaveThisPermission) {
           throw {
             code: 400,
             message: "Manager don't have this permission",
@@ -101,6 +101,10 @@ export class UpdateOtherService {
           message: "Role not found.",
         };
       }
+    }
+
+    if (!props.roleId) {
+      delete dataToUpdate.roleId;
     }
 
     if (managertoUpdate.publicId === actualManager.publicId) {

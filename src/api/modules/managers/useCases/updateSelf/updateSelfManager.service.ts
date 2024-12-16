@@ -1,7 +1,7 @@
 import { updateSelfManagerSchema } from "./updateSelfManager.schema";
-import { IManagerRepository } from "../../../../repositories/manager/managers/repository/IManagerRepository";
 import { IUpdateSelfManagerDTO } from "./updateSelfManager.DTO";
 import { schemaValidate } from "../../../../composables/handleSchemaValidate";
+import { IManagerRepository } from "../../repository/IManagerRepository";
 
 type TUpdatableFields = "email" | "cpf";
 
@@ -37,7 +37,7 @@ export class UpdateSelfManagerService {
       throw {
         code: 400,
         message:
-          "Não há dados suficientes para atualizar os dados do gestor atual.",
+          "There is not enough data to update the current manager's information.",
       };
     }
 

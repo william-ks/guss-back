@@ -87,7 +87,7 @@ export const updateSelfManagerSchema = z.object({
         }
         return true; // If the value is null, it's valid
       },
-      { message: "Data inválida." },
+      { message: "Invalid birthday date." },
     ),
   permissions: z.array(permissionSchema).nullish(),
 });

@@ -1,5 +1,5 @@
 import { schemaValidate } from "../../../../composables/handleSchemaValidate";
-import { IManagerRepository } from "../../../../repositories/manager/managers/repository/IManagerRepository";
+import { IManagerRepository } from "../../repository/IManagerRepository";
 import { IToggleStatusManagerDTO } from "./toggleStatusManager.DTO";
 import { ToggleStatusManagerSchema } from "./toggleStatusManager.schema";
 

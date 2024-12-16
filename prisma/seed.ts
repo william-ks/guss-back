@@ -18,6 +18,10 @@ const createPermissions = async () => {
         name: "Create Managers",
         code: "create_managers",
       },
+      {
+        name: "Edit Other Managers",
+        code: "edit_other_managers",
+      },
     ];
 
     if (permissions.length <= 0) {

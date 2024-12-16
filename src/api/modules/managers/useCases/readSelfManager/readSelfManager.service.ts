@@ -1,4 +1,4 @@
-import { IManagerRepository } from "../../../../repositories/manager/managers/repository/IManagerRepository";
+import { IManagerRepository } from "../../repository/IManagerRepository";
 import { ReadSelfManagerDTO } from "./readSelfManager.DTO";
 
 export class ReadSelfManagerService {
