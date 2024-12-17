@@ -118,6 +118,7 @@ export class ManagerRepository implements IManagerRepository {
     const {
       name,
       publicId,
+      photo,
       email,
       roleId,
       password,
@@ -129,6 +130,7 @@ export class ManagerRepository implements IManagerRepository {
       data: {
         name,
         publicId,
+        photo,
         email,
         password,
         roleId,

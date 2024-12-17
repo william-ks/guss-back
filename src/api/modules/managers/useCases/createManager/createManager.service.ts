@@ -78,11 +78,15 @@ export class CreateManagerService {
 
     const password = this.handlePass.generatePass(12);
     const publicId = idGenerator();
+    const photo =
+      newManager.photo ||
+      "https://i.pinimg.com/736x/cd/3b/f5/cd3bf5ec0480195ac95ee4b17da01b0a.jpg";
 
     await this.managerRepository.save({
       ...newManager,
       publicId,
       permissions,
+      photo,
       password: await this.handlePass.encrypt(password),
     });
 

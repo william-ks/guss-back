@@ -6,12 +6,13 @@ export class CreateManagerController {
   constructor(private readonly service: CreateManagerService) {}
 
   async handle(req: Request, res: Response) {
-    const { name, email, roleId, birthday, cpf, address, permissions } =
+    const { name, email, photo, roleId, birthday, cpf, address, permissions } =
       req.body;
 
     const manager = await this.service.execute({
       name,
       email,
+      photo,
       roleId,
       birthday,
       cpf,

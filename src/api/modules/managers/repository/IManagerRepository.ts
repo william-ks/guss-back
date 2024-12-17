@@ -1,3 +1,4 @@
+import { StringConfigurationOptions } from "aws-sdk/clients/securityhub";
 import { Manager } from "../model/Manager";
 
 export interface IManagerRepository {
@@ -42,6 +43,7 @@ export interface IToggleStatus {
 export interface ISaveManager {
   publicId: string;
   name: string;
+  photo: string;
   email: string;
   roleId: number;
   password: string;
