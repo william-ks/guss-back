@@ -17,7 +17,7 @@ export class CreateManagerService {
 
   async execute(props: ICreateManagerDTO) {
     await schemaValidate(props, createManagerSchema);
-    const { managerPermissions, ...newManager } = props;
+    const { actualManager, permissions, ...newManager } = props;
 
     const emailAlreadyExists = await this.managerRepository.findBy({
       key: "email",
@@ -52,12 +52,12 @@ export class CreateManagerService {
       };
     }
 
-    if (props.permissions.length >= 1) {
+    if (permissions.length >= 1) {
       for (const permissionId of props.permissions) {
         const found = await this.permissionRepository.findById(permissionId);
 
-        const foundIntoActualManager = managerPermissions.find((el) => {
-          return el.id === permissionId;
+        const foundIntoActualManager = actualManager.permissions.find((el) => {
+          return el.permissionId === permissionId;
         });
 
         if (!found) {
@@ -82,6 +82,7 @@ export class CreateManagerService {
     await this.managerRepository.save({
       ...newManager,
       publicId,
+      permissions,
       password: await this.handlePass.encrypt(password),
     });
 

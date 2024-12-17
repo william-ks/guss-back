@@ -47,4 +47,5 @@ export interface ISaveManager {
   password: string;
   cpf?: string;
   birthday?: string;
+  permissions?: number[];
 }

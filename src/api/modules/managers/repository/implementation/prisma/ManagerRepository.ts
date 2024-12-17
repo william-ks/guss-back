@@ -115,8 +115,17 @@ export class ManagerRepository implements IManagerRepository {
   }
 
   async save(props: ISaveManager): Promise<void> {
-    const { name, publicId, email, roleId, password, birthday, cpf } = props;
-    await prismaDb.manager.create({
+    const {
+      name,
+      publicId,
+      email,
+      roleId,
+      password,
+      birthday,
+      cpf,
+      permissions,
+    } = props;
+    const newManager = await prismaDb.manager.create({
       data: {
         name,
         publicId,
@@ -127,6 +136,19 @@ export class ManagerRepository implements IManagerRepository {
         cpf,
       },
     });
+
+    if (permissions) {
+      await Promise.all(
+        permissions.map((permission) =>
+          prismaDb.managerPermission.create({
+            data: {
+              managerId: newManager.id,
+              permissionId: permission,
+            },
+          }),
+        ),
+      );
+    }
   }
 
   async toggleStatus(props: IToggleStatus): Promise<void> {

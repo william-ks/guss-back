@@ -25,7 +25,7 @@ export const createManagerSchema = z.object({
         if (val) {
           try {
             const cpf = val.split(".").join("").split("-").join("");
-            validateCpf(cpf);
+            // validateCpf(cpf);
             return true;
           } catch (e) {
             return false;

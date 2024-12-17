@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CreateManagerService } from "./createManager.service";
+import { Manager } from "../../model/Manager";
 
 export class CreateManagerController {
   constructor(private readonly service: CreateManagerService) {}
@@ -7,16 +8,6 @@ export class CreateManagerController {
   async handle(req: Request, res: Response) {
     const { name, email, roleId, birthday, cpf, address, permissions } =
       req.body;
-
-    const { permissions: managerPermissionsRaw } = req.manager;
-
-    const managerPermissions = managerPermissionsRaw.map((el) => {
-      return {
-        id: el.permission.id,
-        name: el.permission.name,
-        code: el.permission.code,
-      };
-    });
 
     const manager = await this.service.execute({
       name,
@@ -26,7 +17,7 @@ export class CreateManagerController {
       cpf,
       address,
       permissions,
-      managerPermissions,
+      actualManager: req.manager as Manager,
     });
 
     return res.status(201).json({

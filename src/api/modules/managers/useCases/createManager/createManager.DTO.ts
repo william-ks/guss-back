@@ -1,4 +1,7 @@
+import { Manager } from "../../model/Manager";
+
 export interface ICreateManagerDTO {
+  actualManager: Manager;
   name: string;
   email: string;
   roleId: number;
@@ -6,7 +9,4 @@ export interface ICreateManagerDTO {
   birthday?: string;
   address?: string;
   permissions: number[];
-  managerPermissions: {
-    id: number;
-  }[];
 }
