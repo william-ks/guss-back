@@ -15,7 +15,7 @@ export class UpdateSelfManagerService {
     const { id, name, roleId, email, birthday, photo, cpf, permissions } =
       props;
 
-    const dataToUpdate: IDataToUpdate = {
+    const preDataToUpdate: IDataToUpdate = {
       name,
       email,
       roleId,
@@ -25,11 +25,17 @@ export class UpdateSelfManagerService {
       permissions,
     };
 
-    const fieldsToUpdate = Object.keys(dataToUpdate).filter((key) => {
+    const fieldsToUpdate = Object.keys(preDataToUpdate).filter((key) => {
+      if (key === "photo") {
+        return (
+          preDataToUpdate[key] !== null && preDataToUpdate[key] !== undefined
+        );
+      }
+
       if (key !== "permissions") {
-        return dataToUpdate[key] !== undefined;
+        return preDataToUpdate[key] !== undefined;
       } else {
-        return dataToUpdate[key] !== undefined && permissions.length > 0;
+        return preDataToUpdate[key] !== undefined && permissions.length > 0;
       }
     });
 
@@ -81,6 +87,12 @@ export class UpdateSelfManagerService {
           message: check.message2,
         };
       }
+    }
+
+    const dataToUpdate = {};
+
+    for (const field of fieldsToUpdate) {
+      dataToUpdate[field] = preDataToUpdate[field];
     }
 
     await this.managerRepository.update({ id, ...dataToUpdate });

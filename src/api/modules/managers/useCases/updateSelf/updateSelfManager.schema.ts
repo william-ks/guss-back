@@ -23,6 +23,7 @@ export const updateSelfManagerSchema = z.object({
     .min(1)
     .max(10)
     .nullish(),
+  photo: z.string().nullish(),
   cpf: z
     .string({
       required_error: "O CPF é obrigatório.",
