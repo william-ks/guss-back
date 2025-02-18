@@ -1,0 +1,10 @@
+import { {{pascalCase moduleName}}Repository } from "../../repository/{{pascalCase moduleName}}Repository";
+import { {{pascalCase useCaseName}}Controller } from "./{{camelCase useCaseName}}.controller";
+import { {{pascalCase useCaseName}}Service } from "./{{camelCase useCaseName}}.service";
+import { {{camelCase useCaseName}}Schema, T{{pascalCase useCaseName}}Body } from "./entities/{{camelCase useCaseName}}.schema";
+
+const {{camelCase moduleName}}Repository = new {{pascalCase moduleName}}Repository();
+const {{camelCase useCaseName}}Service = new {{pascalCase useCaseName}}Service({{camelCase moduleName}}Repository);
+const {{camelCase useCaseName}}Controller = new {{pascalCase useCaseName}}Controller({{camelCase useCaseName}}Service);
+
+export { {{camelCase useCaseName}}Controller, {{camelCase useCaseName}}Schema, T{{pascalCase useCaseName}}Body };

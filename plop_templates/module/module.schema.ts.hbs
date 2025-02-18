@@ -1,0 +1,15 @@
+import z from "zod";
+
+const create{{pascalCase name}}Schema = {
+	tags: ["{{pascalCase name}}"],
+	summary: "Create {{pascalCase name}}",
+	description: "Register a new {{pascalCase name}} into database.",
+	body: z.object({}),
+	response: {
+		201: z.null(),
+	},
+};
+
+type TCreate{{pascalCase name}}Body = z.infer<typeof create{{pascalCase name}}Schema.body>;
+
+export { create{{pascalCase name}}Schema, TCreate{{pascalCase name}}Body };

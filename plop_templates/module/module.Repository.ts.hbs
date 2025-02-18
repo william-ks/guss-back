@@ -1,0 +1,67 @@
+import { prisma } from "../../../../config/prisma";
+import { {{pascalCase name}} } from "../model/{{pascalCase name}}";
+import {
+ICreate{{pascalCase name}},
+IFindUniqueBy,
+IUpdate{{pascalCase name}},
+I{{pascalCase name}}Repository,
+} from "./I{{pascalCase name}}Repository";
+
+
+class {{pascalCase name}}Repository implements I{{pascalCase name}}Repository {
+    async listAll(): Promise<{{pascalCase name}}[]> {
+        const {{camelCase name}}s = await prisma.{{camelCase name}}.findMany({
+            where: {
+                isDeleted: false,
+            },
+        });
+    
+        return {{camelCase name}}s;
+    }
+    
+    async findUniqueBy({ key, value }: IFindUniqueBy): Promise<{{pascalCase name}} | null> {
+        const {{camelCase name}} = await prisma.{{camelCase name}}.findFirst({
+            where: {
+                [key]: value,
+                isDeleted: false,
+            },
+        });
+
+        return {{camelCase name}} ? {{camelCase name}} : null;
+    }
+    
+    async update(props: IUpdate{{pascalCase name}}): Promise<void> {
+        const { id, ...dataToUpdate } = props;
+
+        await prisma.{{camelCase name}}.update({
+            where: {
+                id: id,
+                isDeleted: false,
+            },
+            data: {
+                ...dataToUpdate,
+            },
+        });
+    }
+    
+    async softDelete(id: number): Promise<void> {
+        await prisma.{{camelCase name}}.update({
+            where: {
+                id,
+            },
+            data: {
+                isDeleted: true,
+            },
+        });
+    }
+
+    async save(props: ICreate{{pascalCase name}}): Promise<void> {
+        await prisma.{{camelCase name}}.create({
+            data: {
+                ...props,
+            },
+        });
+    }
+}
+
+export { {{pascalCase name}}Repository };

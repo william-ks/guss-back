@@ -1,0 +1,10 @@
+import { {{pascalCase name}}Repository } from "../../repository/{{pascalCase name}}Repository";
+import { Create{{pascalCase name}}Controller } from "./create{{pascalCase name}}.controller";
+import { Create{{pascalCase name}}Service } from "./create{{pascalCase name}}.service";
+import { create{{pascalCase name}}Schema, TCreate{{pascalCase name}}Body } from "./entities/create{{pascalCase name}}.schema";
+
+const {{camelCase name}}Repository = new {{pascalCase name}}Repository();
+const create{{pascalCase name}}Service = new Create{{pascalCase name}}Service({{camelCase name}}Repository);
+const create{{pascalCase name}}Controller = new Create{{pascalCase name}}Controller(create{{pascalCase name}}Service);
+
+export { create{{pascalCase name}}Controller, create{{pascalCase name}}Schema, TCreate{{pascalCase name}}Body };

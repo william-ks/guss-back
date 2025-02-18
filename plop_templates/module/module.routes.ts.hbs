@@ -1,0 +1,21 @@
+import {
+	FastifyPluginOptions as FO,
+	FastifyRequest as FQ,
+} from "fastify";
+import { FastifyTypedInstance as FI } from "../../../@types/FastifyTypeInterface";
+import {
+	create{{pascalCase name}}Controller,
+	create{{pascalCase name}}Schema,
+	TCreate{{pascalCase name}}Body,
+} from "./useCases/create{{pascalCase name}}";
+
+const {{camelCase name}}Router = async (fastify: FI, options: FO) => {
+	fastify.post<{ Body: TCreate{{pascalCase name}}Body }>("/create", {
+		schema: create{{pascalCase name}}Schema,
+		handler: (req, res) => {
+			return create{{pascalCase name}}Controller.handle(req, res);
+		},
+	});
+};
+
+export { {{camelCase name}}Router };

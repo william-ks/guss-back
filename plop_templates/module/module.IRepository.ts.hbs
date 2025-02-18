@@ -1,0 +1,20 @@
+import { {{pascalCase name}} } from "../model/{{pascalCase name}}"
+
+export interface I{{pascalCase name}}Repository{
+    save(props: ICreate{{pascalCase name}}): Promise<void>;
+    listAll(): Promise<{{pascalCase name}}[]>;
+    findUniqueBy({ key, value }: IFindUniqueBy): Promise<{{pascalCase name}} | null>;
+    update(props: IUpdate{{pascalCase name}}): Promise<void>;
+    softDelete(id: number): Promise<void>;
+}
+
+export interface ICreate{{pascalCase name}} extends Omit<{{pascalCase name}}, "id"> {}
+
+export interface IFindUniqueBy {
+    key: "id" | "publicId" | "email";
+    value: string | number;
+}
+
+export interface IUpdate{{pascalCase name}} extends Omit<{{pascalCase name}}, "id"> {
+    id: number;
+}

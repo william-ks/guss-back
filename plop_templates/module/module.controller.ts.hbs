@@ -1,0 +1,11 @@
+import { FastifyRequest as FQ, FastifyReply as FY } from "fastify";
+import { Create{{pascalCase name}}Service } from "./create{{pascalCase name}}.service";
+import { TCreate{{pascalCase name}}Body } from "./entities/create{{pascalCase name}}.schema";
+
+class Create{{pascalCase name}}Controller {
+    constructor(private service: Create{{pascalCase name}}Service) {}
+
+    async handle(req: FQ<{Body: TCreate{{pascalCase name}}Body}>, reply: FY) {}
+}
+
+export { Create{{pascalCase name}}Controller };

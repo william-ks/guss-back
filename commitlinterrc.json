@@ -1,0 +1,27 @@
+{
+    "minMessageLength": 10,
+    "maxMessageLength": 100,
+    "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "test",
+        "chore",
+        "build"
+    ],
+    "scope": {
+        "required": false,
+        "allowed": ["*"],
+        "validate": false
+    },
+    "subject": {
+        "minLength": 3,
+        "maxLength": 50,
+        "required": true
+    },
+    "mergeMessage": {
+        "enabled": false
+    }
+}

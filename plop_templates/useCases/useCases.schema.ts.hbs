@@ -1,0 +1,15 @@
+import z from "zod";
+
+const {{camelCase useCaseName}}Schema = {
+	tags: ["{{pascalCase moduleName}}"],
+	summary: "{{pascalCase useCaseName}}",
+	description: "{{pascalCase useCaseName}}",
+	body: z.object({}),
+	response: {
+		200: z.null(),
+	},
+};
+
+type T{{pascalCase useCaseName}}Body = z.infer<typeof {{camelCase useCaseName}}Schema.body>;
+
+export { {{camelCase useCaseName}}Schema, T{{pascalCase useCaseName}}Body };

@@ -1,0 +1,10 @@
+import { I{{pascalCase useCaseName}}DTO } from "./entities/{{camelCase useCaseName}}.DTO";
+import { I{{pascalCase moduleName}}Repository } from "../../repository/I{{pascalCase moduleName}}Repository";
+
+class {{pascalCase useCaseName}}Service {
+    constructor(private {{camelCase moduleName}}Repository: I{{pascalCase moduleName}}Repository){}
+
+    async execute (props: I{{pascalCase useCaseName}}DTO) {};
+}
+
+export { {{pascalCase useCaseName}}Service };

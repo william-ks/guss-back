@@ -1,0 +1,11 @@
+import { FastifyRequest as FQ, FastifyReply as FY } from "fastify";
+import { {{pascalCase useCaseName}}Service } from "./{{camelCase useCaseName}}.service";
+import { T{{pascalCase useCaseName}}Body } from "./index";
+
+class {{pascalCase useCaseName}}Controller {
+    constructor(private service: {{pascalCase useCaseName}}Service) {}
+
+    async handle(req: FQ<{Body: T{{pascalCase useCaseName}}Body}>, reply: FY) {}
+}
+
+export { {{pascalCase useCaseName}}Controller };

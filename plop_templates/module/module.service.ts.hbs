@@ -1,0 +1,13 @@
+import { ICreate{{pascalCase name}}DTO } from "./entities/create{{pascalCase name}}.DTO";
+{{!-- import { create{{pascalCase name}}Zod } from "./entities/create{{pascalCase name}}.zod"; --}}
+import { I{{pascalCase name}}Repository } from "../../repository/I{{pascalCase name}}Repository";
+
+class Create{{pascalCase name}}Service {
+    constructor(private {{camelCase name}}Repository: I{{pascalCase name}}Repository){}
+
+    async execute (props: ICreate{{pascalCase name}}DTO) {
+        {{!-- create{{pascalCase name}}Zod.parse(props); --}}
+    };
+}
+
+export { Create{{pascalCase name}}Service };
