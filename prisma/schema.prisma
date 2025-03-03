@@ -138,7 +138,6 @@ model Schedule {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   lessons  Lesson[]
-  homeworks Homework[]
 
   @@map("schedules")
 }
@@ -178,9 +177,6 @@ model Homework {
 
   lesson   Lesson @relation(fields: [lessonId], references: [id])
   lessonId Int    @map("lesson_id")
-
-  schedule   Schedule @relation(fields: [scheduleId], references: [id])
-  scheduleId Int      @map("schedule_id")
 
   isActive  Boolean @default(true) @map("is_active")
   isDeleted Boolean @default(false) @map("is_deleted")
