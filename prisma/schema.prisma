@@ -149,9 +149,6 @@ model Lesson {
 
   order Int?
 
-  startAt DateTime? @map("start_at")
-  endAt   DateTime? @map("end_at")
-
   level String? @default("C1")
 
   schedule   Schedule @relation(fields: [scheduleId], references: [id])

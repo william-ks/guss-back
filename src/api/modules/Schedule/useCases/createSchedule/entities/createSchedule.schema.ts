@@ -10,7 +10,7 @@ const createScheduleSchema = {
 			.min(3, { message: "Name must be at least 3 characters long" })
 			.max(255, { message: "Name must be at most 255 characters long" }),
 		description: z.string().nullable().optional(),
-		isDefault: z.boolean().default(false),
+		isDefault: z.boolean().optional(),
 	}),
 	response: {
 		201: z.null().describe("Created"),

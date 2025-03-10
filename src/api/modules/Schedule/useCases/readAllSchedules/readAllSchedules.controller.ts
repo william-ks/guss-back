@@ -15,8 +15,10 @@ class ReadAllSchedulesController {
 					orderBy: {
 						order: "asc",
 					},
+					where: {
+						isActive: true,
+					},
 				},
-				homeworks: true,
 			},
 		});
 

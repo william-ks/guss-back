@@ -24,12 +24,19 @@ class CreateScheduleController {
 			};
 		}
 
+		if (isDefault !== true && isDefault !== false) {
+			throw {
+				code: 400,
+				message: "isDefault must be a boolean",
+			};
+		}
+
 		await prisma.schedule.create({
 			data: {
 				publicId: nanoid(),
 				name,
 				description,
-				isDefault,
+				isDefault: isDefault || false,
 			},
 		});
 

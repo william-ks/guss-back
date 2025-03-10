@@ -8,10 +8,13 @@ const createLessonSchema = {
 		name: z.string().nonempty({ message: "Name is required" }),
 		description: z.string().optional(),
 		order: z.number().optional(),
-		startAt: z.string().optional(),
-		endAt: z.string().optional(),
 		level: z.string().nonempty({ message: "Level is required" }),
 		scheduleId: z.string().nonempty({ message: "Schedule is required" }),
+		homework: z
+			.object({
+				description: z.string().optional(),
+			})
+			.optional(),
 	}),
 	response: {
 		201: z.null(),

@@ -9,6 +9,11 @@ import {
 	readAllSchedulesController,
 	readAllSchedulesSchema,
 } from "./useCases/readAllSchedules";
+import {
+	readOneScheduleController,
+	readOneScheduleSchema,
+	TReadOneScheduleParams,
+} from "./useCases/readOneSchedule";
 
 const scheduleRouter = async (fastify: FI, options: FO) => {
 	fastify.post<{ Body: TCreateScheduleBody }>("/create", {
@@ -22,6 +27,13 @@ const scheduleRouter = async (fastify: FI, options: FO) => {
 		schema: readAllSchedulesSchema,
 		handler: (req, res) => {
 			return readAllSchedulesController.handle(req, res);
+		},
+	});
+
+	fastify.get<{ Params: TReadOneScheduleParams }>("/read/one/:id", {
+		schema: readOneScheduleSchema,
+		handler: (req, res) => {
+			return readOneScheduleController.handle(req, res);
 		},
 	});
 };
