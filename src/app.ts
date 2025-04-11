@@ -20,11 +20,22 @@ import fastifyRoutes from "@fastify/routes";
 const fastify: FastifyTypedInstance =
 	FastifyMaster().withTypeProvider<ZodTypeProvider>();
 
+fastify.register(fastifyRoutes);
+
+if (true) {
+	console.log("load");
+}
+
+
+
+
+
+
+
+
 fastify.register(cors, { origin: "http://localhost:3000", credentials: true });
 
 fastify.setErrorHandler(handleErrors);
-
-fastify.register(fastifyRoutes);
 
 fastify.register(multpart, {
 	limits: { fileSize: 10 * 1024 * 1024 },
