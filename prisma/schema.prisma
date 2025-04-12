@@ -170,8 +170,6 @@ model Homework {
   name        String
   description String
 
-  level String? @default("C1")
-
   lesson   Lesson @relation(fields: [lessonId], references: [id])
   lessonId Int    @map("lesson_id")
 

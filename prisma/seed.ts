@@ -73,6 +73,7 @@ const createDefaultDev = async () => {
 		data: {
 			publicId: nanoid(),
 			name: "developer",
+			photo: "https://i.pinimg.com/736x/cd/3b/f5/cd3bf5ec0480195ac95ee4b17da01b0a.jpg",
 			email: "dev@gmail.com",
 			password:
 				"$2a$10$aq4R41Eg4sIZS7P8/kjYa.HIgcZvn6IwNQIT0cPE.hbEUzKuT8tK6",
