@@ -39,13 +39,14 @@ const createManagerSchema = {
 					}
 				},
 				{
-					message: "CPF fornecido é inválido.",
+					message: "CPF is invalid.",
 				},
 			)
 			.describe("000.000.000-00"),
 		password: z
 			.string()
-			.min(8, "Password must be at least 8 characters long"),
+			.min(8, "Password must be at least 8 characters long")
+			.nullish(),
 		phone: z.string().nullish().describe("(99) 99999-9999"),
 		roleId: z.number(),
 		birthday: z

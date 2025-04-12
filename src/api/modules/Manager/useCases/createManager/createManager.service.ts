@@ -4,6 +4,7 @@ import { IPasswordProvider } from "../../../../providers/PasswordProvider/IPassw
 import { IRoleRepository } from "../../../Role/repository/IRoleRepository";
 import { IPermissionRepository } from "../../../Permission/repository/IPermissionRepository";
 import { Manager } from "../../model/Manager";
+import { nanoid } from "nanoid";
 
 class CreateManagerService {
 	constructor(
@@ -49,19 +50,18 @@ class CreateManagerService {
 			};
 		}
 
-		const password = this.handlePass.generatePass(12);
+		const password = process.env.DEFAULT_MANAGER_PASSWORD;
 		const hashPassword = await this.handlePass.hash(password);
 
 		if (!props.photo) {
 			props.photo = process.env.DEFAULT_PROFILE_IMG as string;
 		}
 
-		await this.managerRepository.save(
-			new Manager({
-				...props,
-				password: hashPassword,
-			}),
-		);
+		await this.managerRepository.save({
+			...props,
+			publicId: nanoid(),
+			password: hashPassword,
+		});
 	}
 }
 

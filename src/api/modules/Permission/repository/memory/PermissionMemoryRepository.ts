@@ -19,7 +19,7 @@ class PermissionMemoryRepository implements IPermissionRepository {
 			await generatePermissions(fastify);
 		}
 
-		return PermissionsDb;
+		return PermissionsDb.sort((a, b) => a.name.localeCompare(b.name));
 	}
 
 	async findByCode(code: string) {

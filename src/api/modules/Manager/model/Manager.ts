@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
-import { CourseClass } from "../../CourseClass/model/CourseClass";
+
 import { Role } from "../../Role/model/Role";
+import type { Classroom } from "../../Classroom/model/Classroom";
 
 export class Manager {
 	public readonly id?: number;
@@ -15,7 +16,7 @@ export class Manager {
 	public address?: string;
 	public roleId: number;
 	public role?: Role;
-	public courseClasses?: CourseClass[];
+	public classrooms?: Classroom[];
 	public isDefaultPassword?: boolean;
 	public permissions: string[];
 	public isActive?: boolean;
@@ -35,8 +36,8 @@ export class Manager {
 			this.publicId = publicId;
 		}
 
-		if (!props.courseClasses) {
-			this.courseClasses = [];
+		if (!props.classrooms) {
+			this.classrooms = [];
 		}
 
 		if (!props.photo) {

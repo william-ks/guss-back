@@ -45,7 +45,7 @@ import {
 const managerRouter = async (fastify: FI, options: FO) => {
 	fastify.post<{ Body: TCreateManagerBody }>("/create", {
 		schema: createManagerSchema,
-		preHandler: [handleUserAuthToken, handleManagerLogin],
+		// preHandler: [handleUserAuthToken, handleManagerLogin],
 		handler: (req, res) => {
 			return createManagerController.handle(req, res);
 		},
