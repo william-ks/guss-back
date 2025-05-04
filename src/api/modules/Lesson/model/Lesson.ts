@@ -14,7 +14,7 @@ export class Lesson {
 	public schedule?: Schedule;
 	public scheduleId: number;
 
-	public isActive: boolean;
+	// public isActive: boolean;
 	public isDeleted: boolean;
 
 	public createdAt: Date;

@@ -8,6 +8,7 @@ import { publicRouter } from "./modules/Public/public.routes";
 import { roleRouter } from "./modules/Role/role.routes";
 import { scheduleRouter } from "./modules/Schedule/schedule.routes";
 import { studentRouter } from "./modules/Student/student.routes";
+import { classroomRouter } from "./modules/Classroom/classroom.routes";
 
 const routesRegister = async (fastify: FI, options: FO) => {
 	fastify.register(managerRouter, { prefix: "/manager" });
@@ -18,6 +19,7 @@ const routesRegister = async (fastify: FI, options: FO) => {
 	fastify.register(permissionRouter, { prefix: "/permission" });
 	fastify.register(scheduleRouter, { prefix: "/schedule" });
 	fastify.register(lessonRouter, { prefix: "/lesson" });
+	fastify.register(classroomRouter, { prefix: "/classroom" });
 
 	fastify.ready(async (RouteOptions) => {
 		await generatePermissions(fastify);

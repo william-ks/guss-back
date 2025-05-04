@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import { CourseClass } from "../../CourseClass/model/CourseClass";
 
 export class Student {
 	public readonly id?: number;
@@ -13,7 +12,7 @@ export class Student {
 	public address?: string;
 	public birthday?: string;
 	public description?: string;
-	public courseClass?: CourseClass[];
+	// public courseClass?: CourseClass[];
 	public isActive?: boolean;
 	public isDeleted?: boolean;
 	public primaryColor?: string;

@@ -12,7 +12,7 @@ class CreateLessonController {
 		const proficiencyLevels = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
 		const schedule = await prisma.schedule.findUnique({
-			where: { publicId: scheduleId, isActive: true },
+			where: { publicId: scheduleId, isDeleted: false },
 		});
 
 		if (!proficiencyLevels.includes(level)) {
@@ -33,21 +33,33 @@ class CreateLessonController {
 			where: {
 				order,
 				scheduleId: schedule.id,
-				isActive: true,
+				isDeleted: false,
 			},
 		});
 
 		if (orderExists) {
-			throw {
-				code: 400,
-				message: "Order number already exists",
-			};
+			// seleciona todos os lesson que tem tem o mesmo schedueId e order maior ou igual
+			const lessons = await prisma.lesson.findMany({
+				where: {
+					scheduleId: schedule.id,
+					order: { gte: order },
+					isDeleted: false,
+				},
+			});
+
+			// atualiza todos os lessons com order maior ou igual adicionando 1 ao order
+			for (const lesson of lessons) {
+				await prisma.lesson.update({
+					where: { id: lesson.id },
+					data: { order: lesson.order + 1 },
+				});
+			}
 		}
 
 		await prisma.lesson.create({
 			data: {
 				name,
-				order: order || null,
+				order,
 				description,
 				level,
 				scheduleId: schedule.id,

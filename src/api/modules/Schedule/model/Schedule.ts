@@ -7,7 +7,7 @@ export class Schedule {
 	public description?: string;
 
 	public isDefault: boolean;
-	public isActive: boolean;
+	// public isActive: boolean;
 	public isDeleted: boolean;
 
 	public createdAt: Date;

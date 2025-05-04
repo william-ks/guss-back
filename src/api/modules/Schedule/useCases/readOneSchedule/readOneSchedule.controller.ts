@@ -7,28 +7,21 @@ class ReadOneScheduleController {
 	constructor(private service: ReadOneScheduleService) {}
 
 	async handle(req: FQ<{ Params: TReadOneScheduleParams }>, reply: FY) {
-		const { id } = req.params;
+		const { id: publicId } = req.params;
 
-		if (!id) {
+		if (!publicId) {
 			throw {
 				code: 400,
-				message: "id is required",
-			};
-		}
-
-		if (isNaN(Number(id))) {
-			throw {
-				code: 400,
-				message: "id must be a number",
+				message: "publicId is required",
 			};
 		}
 
 		const schedule = await prisma.schedule.findFirst({
-			where: { id: +id, isDeleted: false },
+			where: { publicId: publicId, isDeleted: false },
 			include: {
 				lessons: {
 					orderBy: { order: "asc" },
-					where: { isDeleted: false, isActive: true },
+					where: { isDeleted: false, isDeleted: false },
 				},
 			},
 		});

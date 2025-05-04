@@ -13,7 +13,7 @@ class CreateScheduleController {
 		const alreadyExists = await prisma.schedule.findFirst({
 			where: {
 				name,
-				isActive: true,
+				isDeleted: false,
 			},
 		});
 

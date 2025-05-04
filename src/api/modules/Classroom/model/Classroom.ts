@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { Student } from "../../Student/model/Student";
 import { Manager } from "../../Manager/model/Manager";
+import { Schedule } from "../../Schedule/model/Schedule";
 
 export class Classroom {
 	public readonly id?: number;
@@ -9,9 +10,9 @@ export class Classroom {
 	public students?: Student[];
 	public teacher?: Manager;
 	public teacherId: number;
-	public classSchedule?: string;
+	public schedule?: Schedule;
+	public scheduleId?: number;
 
-	public isActive: boolean;
 	public isDeleted: boolean;
 	public createdAt: Date;
 	public updatedAt: Date;

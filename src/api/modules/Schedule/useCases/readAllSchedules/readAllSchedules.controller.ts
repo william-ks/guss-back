@@ -8,7 +8,7 @@ class ReadAllSchedulesController {
 	async handle(req: FQ, reply: FY) {
 		const schedules = await prisma.schedule.findMany({
 			where: {
-				isActive: true,
+				isDeleted: false,
 			},
 			include: {
 				lessons: {
@@ -16,7 +16,7 @@ class ReadAllSchedulesController {
 						order: "asc",
 					},
 					where: {
-						isActive: true,
+						isDeleted: false,
 					},
 				},
 			},
