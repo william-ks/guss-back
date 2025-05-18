@@ -31,7 +31,7 @@ class CreateScheduleController {
 			};
 		}
 
-		await prisma.schedule.create({
+		const newest = await prisma.schedule.create({
 			data: {
 				publicId: nanoid(),
 				name,
@@ -40,7 +40,14 @@ class CreateScheduleController {
 			},
 		});
 
-		return reply.code(201).send();
+		const data = {
+			id: newest.publicId,
+			name: newest.name,
+
+			isDefault: newest.isDefault,
+		};
+
+		return reply.code(201).send(data);
 	}
 }
 

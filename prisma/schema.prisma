@@ -80,7 +80,7 @@ model Student {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  courseClass ClassStudent[]
+  classrooms ClassStudent[]
 
   @@map("students")
 }
@@ -118,11 +118,11 @@ model ClassStudent {
   classroom   Classroom @relation(fields: [classroomId], references: [id])
   classroomId Int       @map("classroom_id")
 
-  absences Int? @default(0)
-  presences Int? @default(0)
-  isActive Boolean @default(true) @map("is_active")
-  isDeleted Boolean @default(false) @map("is_deleted")
-  enrollmentDate DateTime @map("enrollment_date")
+  absences       Int?     @default(0)
+  presences      Int?     @default(0)
+  isActive       Boolean  @default(true) @map("is_active")
+  isDeleted      Boolean  @default(false) @map("is_deleted")
+  enrollmentDate DateTime @default(now()) @map("enrollment_date")
 
   @@map("class_students")
 }

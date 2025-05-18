@@ -14,6 +14,9 @@ class ReadAllClassroomController {
 				teacher: true,
 				schedule: true,
 				students: {
+					where: {
+						isDeleted: false,
+					},
 					include: {
 						student: true,
 					},

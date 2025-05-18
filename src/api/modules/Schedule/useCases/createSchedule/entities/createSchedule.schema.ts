@@ -13,7 +13,13 @@ const createScheduleSchema = {
 		isDefault: z.boolean().optional(),
 	}),
 	response: {
-		201: z.null().describe("Created"),
+		201: z
+			.object({
+				id: z.string(),
+				name: z.string(),
+				isDefault: z.boolean(),
+			})
+			.describe("Created"),
 	},
 };
 

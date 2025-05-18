@@ -14,6 +14,16 @@ import {
 	readOneClassroomSchema,
 	TReadOneClassroomParams,
 } from "./useCases/readOneClassroom";
+import {
+	movimentStudentsController,
+	movimentStudentsSchema,
+	TMovimentStudentsBody,
+} from "./useCases/movimentStudents";
+import {
+	toggleStudentActiveController,
+	toggleStudentActiveSchema,
+	TToggleStudentActiveParams,
+} from "./useCases/toggleStudentActive";
 
 const classroomRouter = async (fastify: FI, options: FO) => {
 	fastify.post<{ Body: TCreateClassroomBody }>("/create", {
@@ -36,6 +46,23 @@ const classroomRouter = async (fastify: FI, options: FO) => {
 			return readAllClassroomController.handle(req, res);
 		},
 	});
+
+	fastify.post<{ Body: TMovimentStudentsBody }>("/moviment/students", {
+		schema: movimentStudentsSchema,
+		handler: (req, res) => {
+			return movimentStudentsController.handle(req, res);
+		},
+	});
+
+	fastify.put<{ Params: TToggleStudentActiveParams }>(
+		"/toggle/:classroomId/:studentId",
+		{
+			schema: toggleStudentActiveSchema,
+			handler: (req, res) => {
+				return toggleStudentActiveController.handle(req, res);
+			},
+		},
+	);
 
 	// fastify.get("/findby/teacher/:id", {
 	// 	handler: (req, res) => {

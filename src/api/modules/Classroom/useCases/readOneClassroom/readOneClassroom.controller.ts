@@ -30,6 +30,9 @@ class ReadOneClassroomController {
 					},
 				},
 				students: {
+					where: {
+						isDeleted: false,
+					},
 					include: {
 						student: true,
 					},
@@ -90,7 +93,7 @@ class ReadOneClassroomController {
 				id: student.student.publicId,
 				name: student.student.name,
 				email: student.student.email,
-				isActive: student.student.isActive,
+				isActive: student.isActive,
 				absences: student.absences,
 				presences: student.presences,
 				enrollmentDate: new Intl.DateTimeFormat("pt-BR", {
