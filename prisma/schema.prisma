@@ -12,6 +12,21 @@ generator erd {
   output   = "./database_erd.svg"
 }
 
+enum LessonLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+enum SubLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
 model Role {
   id                    Int       @id @default(autoincrement())
   title                 String
@@ -50,8 +65,9 @@ model Manager {
   isActive          Boolean @default(true) @map("is_active")
   isDeleted         Boolean @default(false) @map("is_deleted")
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  LessonInstance LessonInstance[]
 
   @@map("managers")
 }
@@ -81,6 +97,7 @@ model Student {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   classrooms ClassStudent[]
+  Attendance Attendance[]
 
   @@map("students")
 }
@@ -103,8 +120,9 @@ model Classroom {
   finished Boolean @default(false)
   status   String
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  LessonInstance LessonInstance[]
 
   @@map("classrooms")
 }
@@ -118,8 +136,6 @@ model ClassStudent {
   classroom   Classroom @relation(fields: [classroomId], references: [id])
   classroomId Int       @map("classroom_id")
 
-  absences       Int?     @default(0)
-  presences      Int?     @default(0)
   isActive       Boolean  @default(true) @map("is_active")
   isDeleted      Boolean  @default(false) @map("is_deleted")
   enrollmentDate DateTime @default(now()) @map("enrollment_date")
@@ -153,7 +169,8 @@ model Lesson {
 
   order Int?
 
-  level String? @default("C1")
+  level    LessonLevel @default(C1) @map("level")
+  subLevel SubLevel    @default(BEGINNER) @map("sub_level")
 
   schedule   Schedule @relation(fields: [scheduleId], references: [id])
   scheduleId Int      @map("schedule_id")
@@ -163,9 +180,51 @@ model Lesson {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  homework Homework[]
+  homework       Homework[]
+  LessonInstance LessonInstance[]
+  Attendance     Attendance[]
 
   @@map("lessons")
+}
+
+model LessonInstance {
+  id       Int    @id @default(autoincrement())
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
+  lessonId Int    @map("lesson_id")
+
+  classroom   Classroom @relation(fields: [classroomId], references: [id])
+  classroomId Int       @map("classroom_id")
+
+  startTime DateTime @map("start_time")
+  endTime   DateTime @map("end_time")
+
+  teacher   Manager @relation(fields: [teacherId], references: [id])
+  teacherId Int     @map("teacher_id")
+
+  isDeleted Boolean @default(false) @map("is_deleted")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("lesson_instances")
+}
+
+model Attendance {
+  id Int @id @default(autoincrement())
+
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
+  lessonId Int    @map("lesson_id")
+
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId Int     @map("student_id")
+
+  isPresent Boolean @default(false) @map("is_present")
+  isDeleted Boolean @default(false) @map("is_deleted")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("attendances")
 }
 
 model Homework {
